@@ -1,34 +1,38 @@
-# Build products
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+venv/
+.venv/
+
+# C/C++ build outputs
 build/
+cmake-build-*/
 CMakeFiles/
 CMakeCache.txt
-cmake_install.cmake
-Makefile
-*.o
-*.obj
 *.exe
+*.dll
+*.lib
+*.obj
+*.o
 
-# Python caches and local environments
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-
-# Downloaded datasets
-data/
-*.tar.gz
-
-# Transient protocol payloads and local logs
-**/work/
-*.bin
-*.log
+# Experiment outputs
+results/*.json
+results/*.log
+results/*.csv
+results/**/*.json
+results/**/*.log
+results/**/*.csv
+results/**/*.pdf
+results/**/*.png
+data/*.pkl
+data/*.npz
+data/**/*.pkl
+data/**/*.npz
 *.tmp
+*.out
 
-# Historical and nonformal outputs are not part of the public release
-results/formal/
-results/preflight/
-results/preflight_nonformal/
-
-# The public repository keeps compact V8 summaries and paper artifacts.
-# Per-run files can be regenerated with the frozen runners.
-results/formal_v8/**/*.raw.json
+# Local system files
+.DS_Store
+Thumbs.db

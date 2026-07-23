@@ -1,0 +1,62 @@
+schema: rel_hide_fl_experiment_config_v1
+formal: false
+client_runtime: wsl
+
+deployment:
+  host_roles:
+    - cs
+    - s1
+    - s2
+    - t1
+    - t2
+  client_mode: wsl_processes_or_docker
+  network_model: reliable_point_to_point_local
+  network_security_claim: false
+
+protocol:
+  k: 2
+  k0: 2
+  paths:
+    - S1
+    - S2
+    - T1
+    - T2
+  apbr_enabled: true
+  fragmentation_enabled: true
+  dummy_padding_enabled: true
+  permutation_enabled: true
+
+quantization:
+  S_qnt: 1000
+  G_max: 1
+
+preflight_cases:
+  - case_id: c2_d16_zero
+    clients: 2
+    dimension: 16
+    noise: zero
+    formal: false
+  - case_id: c10_d784_openfhe
+    clients: 10
+    dimension: 784
+    noise: openfhe_default
+    formal: false
+
+scalability:
+  clients: [5, 10, 20, 30, 50]
+  dimensions: [784, 3072, 10000]
+  seeds: [2024, 2025, 2026]
+  repetitions_per_seed: 3
+
+multiblock_scaling:
+  clients: [10, 30, 50]
+  dimensions: [8192, 16384, 30730, 65536, 131072]
+  seeds: [2024, 2025, 2026]
+  repetitions_per_seed: 5
+
+utility:
+  datasets: [MNIST, CIFAR10]
+  model: multinomial_logistic_regression
+  clients: 10
+  rounds: 20
+  seeds: [2024, 2025, 2026]

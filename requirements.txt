@@ -1,0 +1,8 @@
+numpy==1.26
+matplotlib
+pyyaml
+tqdm
+torch
+torchvision
+openfhe-python
+scipy
