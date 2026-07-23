@@ -1,0 +1,10 @@
+\begin{tabularx}{\linewidth}{@{}L{3.8cm}L{3.0cm}L{3.0cm}L{1.0cm}@{}}
+\toprule
+Condition & Left side & Right side & Result \\
+\midrule
+IntCRT coordinate no-wrap & $2c_{\max}B_z=100{,}000$ & $\min m_\ell=131{,}071$ & \textsc{Pass} \\
+PolySubR component lift & $c_{\max}B_X=4.2959\times 10^{11}$ & $t/2=1.0995\times 10^{12}$ & \textsc{Pass} \\
+Plaintext coefficient canonicality & Coefficients reduced modulo $t$ before centered lift into $R_q$ & implementation check & \textsc{Pass} \\
+Ciphertext centered lift & $c_{\max}(t-1)/2+tc_{\max}B_e=4.3431\times 10^{15}$ & $Q_{\mathrm{eff}}/2=6.3383\times 10^{29}$ & \textsc{Pass} \\
+\bottomrule
+\end{tabularx}

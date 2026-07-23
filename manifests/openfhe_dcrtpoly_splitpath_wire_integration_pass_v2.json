@@ -1,0 +1,21 @@
+{
+  "manifest_schema": "openfhe_dcrtpoly_splitpath_wire_integration_manifest_v2",
+  "id": "openfhe_dcrtpoly_splitpath_wire_integration_pass_v2",
+  "status": "PASS",
+  "supersedes": "openfhe_dcrtpoly_splitpath_wire_integration_pass_v1",
+  "reason": "Protocol-consistent OpenFHE DCRTPoly material now uses b_i=a*sk_i+t*e_i+iota_t_to_q(m_i), full per-tower public-a sampling, and centered-CRT mod-t plaintext recovery.",
+  "release_manifest": "manifests/formal_evaluation_release_v5.json",
+  "release_manifest_sha256": "B0C8D4973C489E289F9C348A78FC12749C7D7FCF8B61D41072E5E69A17F431FB",
+  "source": "src/openfhe_dcrtpoly_wire_integration.cpp",
+  "source_sha256": "747B100A8D28375633DA6AE60F357B2CE310390591D4E12CD6CD137286A73600",
+  "binary": "build/openfhe_dcrtpoly_wire_integration",
+  "binary_sha256": "E32918124E1BCA9A1533C0CD7478E1A338B382FA5991C3B7D23430D1DC3CE28F",
+  "result_summary": "results/preflight/openfhe_dcrtpoly_wire_integration_v2/summary.json",
+  "result_summary_sha256": "B1842A5C8E3B0845997D0017FF00312BD79D027206E2C7AD24AD6D75F527DDEC",
+  "cases": [
+    "results/preflight/openfhe_dcrtpoly_wire_integration_v2/c2_d16_zero.json",
+    "results/preflight/openfhe_dcrtpoly_wire_integration_v2/c10_d784_dgg32.json"
+  ],
+  "formal_evaluation_started": false,
+  "next_required_step": "rerun formal scalability, baselines, ablations, and utility using release v5 or a later protocol-consistent release"
+}

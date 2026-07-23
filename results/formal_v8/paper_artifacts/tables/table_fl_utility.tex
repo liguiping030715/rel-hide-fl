@@ -1,0 +1,16 @@
+\begin{table}
+\caption{FL utility sanity and full-protocol aggregate equivalence.}
+\label{tab:eval-utility}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+dataset & seed & gradient_dimension & dcrtpoly_blocks & max_protocol_quantized_diff_linf & total_protocol_block_mismatches & final_plain_acc & final_quantized_acc & final_protocol_acc \\
+\midrule
+mnist & 2024 & 7850 & 1 & 0 & 0 & 0.865000 & 0.865000 & 0.865000 \\
+cifar10 & 2024 & 30730 & 1 & 0 & 0 & 0.132500 & 0.156500 & 0.156500 \\
+mnist & 2025 & 7850 & 1 & 0 & 0 & 0.889500 & 0.889500 & 0.889500 \\
+cifar10 & 2025 & 30730 & 1 & 0 & 0 & 0.101000 & 0.111500 & 0.111500 \\
+mnist & 2026 & 7850 & 1 & 0 & 0 & 0.868000 & 0.868000 & 0.868000 \\
+cifar10 & 2026 & 30730 & 1 & 0 & 0 & 0.131000 & 0.092000 & 0.092000 \\
+\bottomrule
+\end{tabular}
+\end{table}

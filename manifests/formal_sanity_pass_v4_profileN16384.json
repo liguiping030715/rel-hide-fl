@@ -1,0 +1,26 @@
+{
+  "manifest_schema": "formal_sanity_pass_manifest_v4",
+  "id": "formal_sanity_pass_v4_profileN16384",
+  "status": "PASS",
+  "formal": false,
+  "release_manifest": "manifests/formal_evaluation_release_v4.json",
+  "release_manifest_sha256": "87E046C06EA905B3752A65612FEC071530FAEE112B4B3783E9E661F6D9433BAF",
+  "summary": "results/preflight/formal_sanity_v4_profileN16384/summary.json",
+  "summary_sha256": "8D0EDE503EE901842899B05243A870E7D8C039C5BD31CA30C69A5014E53DF20D",
+  "csv": "results/preflight/formal_sanity_v4_profileN16384/formal_sanity_matrix.csv",
+  "csv_sha256": "51BBA41E93294631654F0440EE2655D71A204FB5C0BD43998EDAFCB976D27EF6",
+  "clients": 5,
+  "dimension": 784,
+  "ring_dim": 16384,
+  "noise": "dgg32",
+  "seeds": [
+    2024,
+    2025,
+    2026
+  ],
+  "case_count": 3,
+  "passed": 3,
+  "failed": 0,
+  "next_step": "formal_scalability_first_batch_d784_profileN16384",
+  "note": "Profile B N=16384 sanity run only; not used as formal Evaluation performance sample."
+}

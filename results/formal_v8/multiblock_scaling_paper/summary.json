@@ -1,0 +1,36 @@
+{
+  "schema": "formal_multiblock_scaling_summary_v1",
+  "status": "PASS",
+  "formal": true,
+  "release_manifest": "manifests/formal_evaluation_release_v8_final.json",
+  "release_manifest_sha256": "4DC35423DAC9696359BDC13F909D94F47F1AF76F6C71DEC9ACE0FA2AA60ADE1C",
+  "clients": [
+    10,
+    30,
+    50
+  ],
+  "dimensions": [
+    8192,
+    32768,
+    32769,
+    65536,
+    131072
+  ],
+  "ring_dim": 16384,
+  "seeds": [
+    2024,
+    2025,
+    2026
+  ],
+  "repetitions": 5,
+  "sample_count": 225,
+  "passed": 225,
+  "failed": 0,
+  "max_encoded_plaintext_diff_linf": 0.0,
+  "total_encoded_plaintext_mismatch_count": 0.0,
+  "total_protocol_abort_count": 0.0,
+  "communication_scope": "serialized application-level split-path relay payload; transport headers, control-plane messages, logging and OS overhead excluded",
+  "csv": "results/formal_v8/multiblock_scaling_paper/formal_multiblock_scaling_matrix.csv",
+  "progress": "results/formal_v8/multiblock_scaling_paper/progress.json",
+  "output_dir": "results/formal_v8/multiblock_scaling_paper"
+}

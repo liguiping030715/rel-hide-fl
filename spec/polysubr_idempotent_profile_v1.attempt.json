@@ -1,0 +1,127 @@
+{
+  "component_order": "IntCRT group g -> factor f_g",
+  "correctness_summary": "The factor/idempotent algebra and parameter bounds pass. The current runner must still implement idempotent encoding and remainder decoding before this can support a paper-code conformance pass.",
+  "decode_rule": "remainder modulo f_g=x-root_g, then constant extraction",
+  "encode_rule": "sum_g [X_g]_t * e_g mod (x^N+1)",
+  "factor_count": 16384,
+  "factor_model": "linear factors over F_t because t is prime and 2N divides t-1",
+  "factor_order": "g maps to root omega^(2g+1), g=0..N-1",
+  "factor_polynomials_preview": [
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "29274930368",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 0,
+      "root": "2169748357953"
+    },
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "1018872056177",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 1,
+      "root": "1180151232144"
+    },
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "275959860467",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 2,
+      "root": "1923063427854"
+    },
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "1764190149104",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 3,
+      "root": "434833139217"
+    },
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "1364828551597",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 4,
+      "root": "834194736724"
+    },
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "452922772717",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 5,
+      "root": "1746100515604"
+    },
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "921536439345",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 6,
+      "root": "1277486848976"
+    },
+    {
+      "factor_polynomial": {
+        "coefficients_low_to_high_mod_t": [
+          "1043308568709",
+          "1"
+        ],
+        "degree": 1,
+        "meaning": "x - root"
+      },
+      "g": 7,
+      "root": "1155714719612"
+    }
+  ],
+  "factor_product_matches_ring_polynomial": true,
+  "intcrt_group_size": 2,
+  "intcrt_moduli": [
+    131071,
+    131101
+  ],
+  "omega_2N_root": "2169748357953",
+  "omega_checks": {
+    "omega_to_2N": "1",
+    "omega_to_N": "2199023288320"
+  },
+  "plaintext_modulus": "2199023288321",
+  "primitive_generator": "3",
+  "profile_id": "polysubr_idempotent_v1_attempt_linear_factors",
+  "ring_dimension": 16384,
+  "ring_polynomial": "x^N + 1",
+  "schema": "polysubr_idempotent_profile_attempt_v1",
+  "status": "PASS_IDEMPOTENT_PARAMETER_BOUNDS_IMPLEMENTATION_PREFLIGHT",
+  "uses_direct_coefficient_embedding": false,
+  "uses_idempotents": true
+}

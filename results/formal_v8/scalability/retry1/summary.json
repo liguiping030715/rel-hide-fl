@@ -1,0 +1,35 @@
+{
+  "schema": "formal_scalability_summary_v1",
+  "status": "PASS",
+  "formal": true,
+  "release_manifest": "manifests/formal_evaluation_release_v8_final.json",
+  "release_manifest_sha256": "4DC35423DAC9696359BDC13F909D94F47F1AF76F6C71DEC9ACE0FA2AA60ADE1C",
+  "clients": [
+    5,
+    10,
+    20,
+    30,
+    50
+  ],
+  "dimensions": [
+    784,
+    3072,
+    10000
+  ],
+  "seeds": [
+    2024,
+    2025,
+    2026
+  ],
+  "repetitions": 5,
+  "sample_count": 225,
+  "passed": 225,
+  "failed": 0,
+  "max_q_domain_diff_linf": 0.0,
+  "total_q_domain_mismatch_count": 0.0,
+  "max_encoded_plaintext_diff_linf": 0.0,
+  "total_encoded_plaintext_mismatch_count": 0.0,
+  "csv": "results/formal_v8/scalability/retry1/formal_scalability_matrix.csv",
+  "progress": "results/formal_v8/scalability/retry1/progress.json",
+  "output_dir": "results/formal_v8/scalability/retry1"
+}

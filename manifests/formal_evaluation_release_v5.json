@@ -1,0 +1,165 @@
+{
+  "manifest_schema": "formal_evaluation_release_manifest_v5",
+  "release": {
+    "id": "formal_evaluation_release_v5",
+    "status": "FROZEN_FOR_PROTOCOL_CONSISTENT_FORMAL_RERUN",
+    "formal_evaluation_started": false,
+    "supersedes": "formal_evaluation_release_v4",
+    "refreeze_reason": "Protocol-consistent material generation: b_i = a*sk_i + t*e_i + iota_t_to_q(m_i), full per-tower public-a sampling, centered ternary secret sampler, finite rounded Gaussian error sampler, and centered-CRT mod-t correctness checks.",
+    "created_after": "runtime_json_smoke_pass"
+  },
+  "implementation": {
+    "protocol": "APBR-LPSU split-path aggregation",
+    "backend": "OpenFHE_DCRTPoly",
+    "material_formula": "b_i = a*sk_i + t*e_i + iota_t_to_q(m_i) over OpenFHE DCRTPoly",
+    "wire_serialization": "tower-major coefficient DCRTPoly wire blob",
+    "paths": [
+      "S1",
+      "S2",
+      "T1",
+      "T2"
+    ],
+    "k": 2,
+    "k0": 2,
+    "security_claim_mode": "conservative",
+    "network_security_claim": false,
+    "plaintext_modulus": "2199023288321",
+    "public_a_sampler": "independent uniform residues per tower coefficient",
+    "secret_sampler": "centered ternary {-1,0,1}",
+    "error_sampler": "finite rounded Gaussian sigma=3.2 support=[-39,39] for dgg32"
+  },
+  "source_and_binary": {
+    "wire_integration_cpp": "src/openfhe_dcrtpoly_wire_integration.cpp",
+    "wire_integration_cpp_sha256": "747B100A8D28375633DA6AE60F357B2CE310390591D4E12CD6CD137286A73600",
+    "material_smoke_cpp": "src/openfhe_dcrtpoly_material_smoke.cpp",
+    "material_smoke_cpp_sha256": "DA7AFABB3F3784F1DEE6A3E079B36BF5756099874A8E5623B48DEDFCBAF47EF2",
+    "cmake": "CMakeLists.txt",
+    "cmake_sha256": "4BA9C7BF4144355D7D56A7B667BEC0D127C858496BA08BCD8654C5F98C1A42F3",
+    "config": "configs/default.json",
+    "config_sha256": "9C237B6F499E94159B2A1A69EA50A5C4EF0F42A1B0C4595D38D80E8CB7051EC9",
+    "formal_sanity_script": "scripts/run_formal_sanity.ps1",
+    "formal_sanity_script_sha256": "D5535D4F30481F7E821C8455A9E6F0F945DDCB0F4C33566479348835EDB8B342",
+    "wire_integration_binary": "build/openfhe_dcrtpoly_wire_integration",
+    "wire_integration_binary_sha256": "E32918124E1BCA9A1533C0CD7478E1A338B382FA5991C3B7D23430D1DC3CE28F",
+    "material_smoke_binary": "build/openfhe_dcrtpoly_material_smoke",
+    "material_smoke_binary_sha256": "31E7C2B7062A88407C84609EB6F14104C48F1E2EFC2684FF9D1B29DA6442A8E8",
+    "formal_scalability_script": "scripts/run_formal_scalability_matrix.ps1",
+    "formal_scalability_script_sha256": "124C9C53B2AB0DC25CB67113A1E0F8A0EA441FE450AF8FF6C9ADA01956C67819",
+    "fl_utility_script": "scripts/run_fl_utility.py",
+    "fl_utility_script_sha256": "17582BFA8C0308168EC3A572F006EA56D9355971EE3A801BE1C7C2AB7F811BEE"
+  },
+  "environment": {
+    "host_os": "Microsoft Windows 11 Home Chinese, version 10.0.26100 build 26100",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13700HX",
+    "cpu_cores": 16,
+    "logical_processors": 24,
+    "ram_bytes": 16877125632,
+    "wsl_distribution": "Ubuntu",
+    "wsl_kernel": "6.6.114.1-microsoft-standard-WSL2",
+    "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "cmake": "cmake version 4.2.3",
+    "openfhe_install_prefix": "/home/liguiping/openfhe-install",
+    "openfhe_libraries": [
+      "libOPENFHEcore.so.1.2.3",
+      "libOPENFHEpke.so.1.2.3",
+      "libOPENFHEbinfhe.so.1.2.3"
+    ]
+  },
+  "validated_gates": {
+    "topology_validation": "PASS",
+    "backend_validation": "PASS",
+    "shared_a_material_splitpath_integration": "PASS",
+    "aggregate_error_sanity_check": "PASS",
+    "openfhe_dcrtpoly_material_smoke": "PASS",
+    "openfhe_dcrtpoly_splitpath_wire_integration": "PASS_PROTOCOL_CONSISTENT_MINIMAL_CASES"
+  },
+  "bound_manifests": {
+    "host_client_tcp_preflight": "manifests/host_client_tcp_preflight_pass_v1.json",
+    "phase1_topology_full": "manifests/phase1_topology_full_pass_v1.json",
+    "openfhe_backend_smoke": "manifests/openfhe_backend_smoke_pass_v1.json",
+    "openfhe_backend_matrix_pilot": "manifests/openfhe_backend_matrix_pilot_pass_v1.json",
+    "shared_a_material_splitpath_integration": "manifests/shared_a_material_splitpath_integration_pass_v1.json",
+    "openfhe_dcrtpoly_material_smoke": "manifests/openfhe_dcrtpoly_material_smoke_pass_v1.json",
+    "openfhe_dcrtpoly_wire_integration": "manifests/openfhe_dcrtpoly_splitpath_wire_integration_pass_v2.json"
+  },
+  "runtime_output_contract": {
+    "required_fields": [
+      "status",
+      "encoded_plaintext_diff_linf",
+      "encoded_plaintext_mismatch_count",
+      "post_key_removal_mod_t_diff_linf",
+      "wire_serialization_roundtrip",
+      "wire_aggregate_equals_local",
+      "apbr_sum_preserved_all_paths",
+      "material_formula",
+      "public_a_sampler",
+      "secret_sampler",
+      "error_sampler",
+      "wire_bytes",
+      "total_wire_bytes",
+      "runtime_ms"
+    ],
+    "runtime_ms_fields": [
+      "setup",
+      "material_generation",
+      "sharing",
+      "path_processing",
+      "cs_recovery",
+      "total"
+    ],
+    "formal_scalability_first_batch": {
+      "clients": [
+        5,
+        10,
+        20,
+        30,
+        50
+      ],
+      "dimensions": [
+        784
+      ],
+      "seeds": [
+        2024,
+        2025,
+        2026
+      ],
+      "repetitions": 5,
+      "ring_dim": 16384,
+      "plaintext_modulus": "2199023288321"
+    }
+  },
+  "freeze_rules": {
+    "rerun_release_required_if_changed": [
+      "DCRTPoly material provider",
+      "wire serialization format",
+      "APBR implementation",
+      "fragmentation implementation",
+      "dummy generation",
+      "permutation",
+      "aggregate recovery equation",
+      "OpenFHE installation",
+      "compiler or build flags",
+      "formal-run binary"
+    ],
+    "do_not_claim": [
+      "128-bit post-quantum security from experiments",
+      "network attacker security",
+      "malicious shuffler detection",
+      "empirical unlinkability proof"
+    ]
+  },
+  "next_step": {
+    "name": "formal_protocol_consistent_scalability_rerun",
+    "formal": false,
+    "clients": 5,
+    "dimension": 784,
+    "noise": "dgg32",
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "purpose": "rerun formal evaluation after replacing simplified a*sk+e+m material with protocol-consistent t*e+iota(m) material and mod-t correctness checks",
+    "ring_dim": 16384
+  }
+}

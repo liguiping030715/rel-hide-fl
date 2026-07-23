@@ -1,0 +1,55 @@
+{
+  "manifest_schema": "controlled_baseline_release_manifest_v1",
+  "id": "controlled_baseline_release_v1",
+  "status": "FROZEN_FOR_CONTROLLED_BASELINES",
+  "formal_baseline_started": false,
+  "relation_to_phase1": "Phase 1 Profile B results remain bound to formal_evaluation_release_v4. This release adds baseline variants and native OpenFHE BGV-only runner.",
+  "baseline_definitions": {
+    "plain_aggregate": "Plaintext vector summation; theoretical minimum local aggregation baseline.",
+    "openfhe_bgv_only": "Native OpenFHE BGV/RNS Encrypt, EvalAdd, Decrypt; no split-path APBR-LPSU.",
+    "shuffle_only": "APBR, k-fragment splitting, zero-sum dummy padding and permutation over DCRTPoly messages; no RLWE key-removal semantics.",
+    "full_protocol": "APBR-LPSU full split-path DCRTPoly protocol."
+  },
+  "source_and_binary": {
+    "wire_integration_cpp": "src/openfhe_dcrtpoly_wire_integration.cpp",
+    "wire_integration_cpp_sha256": "38DD931FBA66F22E669FCF419CDB8E4992F93A04A2A4B348A83B202F56B343F4",
+    "bgv_only_cpp": "src/openfhe_bgv_only_baseline.cpp",
+    "bgv_only_cpp_sha256": "5A346D9513728B1330094AE091AA0BE9F0222A5353207788755E63E0728D4620",
+    "cmake": "CMakeLists.txt",
+    "cmake_sha256": "3B6B1A894F5E58F01946CA86210766B7D761F764BAD01A4931BF5F10845308B5",
+    "controlled_baseline_runner": "scripts/run_controlled_baselines.ps1",
+    "controlled_baseline_runner_sha256": "DF213068D285A0FD6DC351CE32A85C7ABBD64AB881A97699E7364C781D194634",
+    "wire_integration_binary": "build/openfhe_dcrtpoly_wire_integration",
+    "wire_integration_binary_sha256": "9F41D6EF45F2FE2EB8EF6D6BFE39CC34C3F3E853AE1D99717D90D836F416DEBA",
+    "bgv_only_binary": "build/openfhe_bgv_only_baseline",
+    "bgv_only_binary_sha256": "EAD49827980C1D29514CFBCA9C3CF9F47CA9D30BD5A1E0B0587DEE0D0130D7D4"
+  },
+  "matrix": {
+    "variants": [
+      "plain_aggregate",
+      "openfhe_bgv_only",
+      "shuffle_only",
+      "full_protocol"
+    ],
+    "clients": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "dimension": 784,
+    "ring_dim": 16384,
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "samples": 300
+  },
+  "correctness_requirement": {
+    "q_domain_diff_linf": 0,
+    "q_domain_mismatch_count": 0
+  }
+}

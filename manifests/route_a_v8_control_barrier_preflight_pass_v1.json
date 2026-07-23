@@ -1,0 +1,76 @@
+{
+  "schema": "route_a_v8_control_barrier_preflight_manifest_v1",
+  "status": "PASS",
+  "created_at": "2026-07-22",
+  "scope": "nonformal independent-process OpenFHE DCRTPoly split-path preflight over counted local TCP with a synchronized control barrier",
+  "formal": false,
+  "formal_samples_started": 0,
+  "formal_evaluation_authorized": false,
+  "implementation": {
+    "core_source_sha256": "31aac74199f6ad35e67230b0895c46cb3bb72d7b92f563efb0b4c69ada6683f3",
+    "randomness_header_sha256": "26e0db14b3d33b0dbf57cd7323846ffd3a391630ca24fe2ad598d38d7cae891e",
+    "launcher_sha256": "9e775b2aa4ef3decf65411fab3f261fbf44c5c8b737b652719e9f7498722b84a",
+    "binary_sha256": "53b50e1b15a98dd34498d7a4f9d3424047ea6cd0693a23222e44eb75ff756ac7",
+    "build_type": "Release",
+    "compiler": "/usr/bin/c++",
+    "openfhe_prefix": "/home/liguiping/openfhe-install"
+  },
+  "protocol_profile": {
+    "ring_dimension": 16384,
+    "dcrt_towers": 2,
+    "tower_bits": 50,
+    "plaintext_modulus": "2199023288321",
+    "fragment_count_k": 2,
+    "dummy_count_k0": 2,
+    "packing": "intcrt_polysubr",
+    "shared_public_a_sampled_once_by_setup": true,
+    "secret_sampler": "OpenFHE DCRTPoly::TugType",
+    "error_sampler": "OpenFHE DCRTPoly::DggType(3.2)",
+    "uniform_ring_sampler": "OpenFHE DCRTPoly::DugType",
+    "permutation": "Fisher-Yates with rejection-sampled UniformBelow"
+  },
+  "cases": [
+    {
+      "run_id": "v8_barrier_c2_d16_zero_20260722",
+      "clients": 2,
+      "dimension": 16,
+      "noise": "zero",
+      "summary_sha256": "30261cd38703774aca65d0788ecf9e339da58904880badc8064037e984af8acc",
+      "status": "PASS",
+      "encoded_plaintext_mismatch_count": 0,
+      "total_application_protocol_bytes": 8390624
+    },
+    {
+      "run_id": "v8_barrier_c10_d784_dgg32_20260722",
+      "clients": 10,
+      "dimension": 784,
+      "noise": "dgg32",
+      "summary_sha256": "36d9078763d529e768540791bd3972ac6ac6225cbb871242cd7c86108be5848b",
+      "status": "PASS",
+      "encoded_plaintext_mismatch_count": 0,
+      "total_application_protocol_bytes": 33562080
+    }
+  ],
+  "verified": {
+    "all_roles_ready_before_release": true,
+    "cs_complete_after_decode_and_correctness": true,
+    "client_to_path_socket_byte_conservation": true,
+    "path_to_cs_socket_byte_conservation": true,
+    "control_plane_excluded_from_protocol_bytes": true,
+    "direct_client_to_cs_bytes_zero": true,
+    "shared_a_digest_equal_all_clients": true,
+    "setup_id_binds_public_a": true,
+    "duplicate_initial_prng_prefixes": 0,
+    "encoded_plaintext_mismatches": 0
+  },
+  "limitations": [
+    "These runs are nonformal preflights and their timings are not paper performance results.",
+    "The roles ran as independent Ubuntu/WSL processes on local loopback; Docker-client-to-WSL-server topology remains to be validated.",
+    "The final release and post-run result manifests have not yet been frozen."
+  ],
+  "remaining_gates": [
+    "Docker client to WSL path/CS topology preflight",
+    "P3 parameter and sampler certificate",
+    "formal release manifest and external launcher validation"
+  ]
+}

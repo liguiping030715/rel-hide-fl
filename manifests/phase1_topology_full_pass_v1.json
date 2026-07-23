@@ -1,0 +1,47 @@
+{
+  "manifest_schema": "phase1_topology_full_manifest_v1",
+  "status": "PASS",
+  "formal_results_started": false,
+  "scope": "splitpath_topology_correctness_matrix_only",
+  "openfhe_integrated": false,
+  "source": {
+    "matrix_runner": "scripts/run_phase1_topology_matrix.py",
+    "matrix_runner_sha256": "7B82D8C0C338FD0E949D90AC7AAA10118D453424013AE8774E9AA48F19F7F68B",
+    "case_runner": "scripts/host_client_preflight.py",
+    "case_runner_sha256": "820BF5CA88254FDCEB5D1FBFBBBF1BEFF99DD1F909465CB98BE448107B55C610"
+  },
+  "matrix": {
+    "clients": [5, 10, 20, 30, 50],
+    "dimensions": [784, 3072, 10000],
+    "seeds": [2024, 2025, 2026],
+    "k": 2,
+    "k0": 2,
+    "case_count": 45,
+    "passed": 45,
+    "failed": 0
+  },
+  "results": {
+    "summary": "results/preflight/phase1_topology_full/summary.json",
+    "summary_sha256": "0C4FB201562090C7D98E43A80C63A14256FAA0BFACFD0E24B809E299FDB1CD6C",
+    "csv": "results/preflight/phase1_topology_full/phase1_topology_matrix.csv",
+    "csv_sha256": "73F209F5A625F04EDC6E73515EBD83E041622C730717E4853EC4E1C3A27A42FC"
+  },
+  "acceptance": {
+    "all_cases_status_pass": true,
+    "all_mismatch_count_zero": true,
+    "all_client_to_path_conservation": true,
+    "all_path_to_cs_conservation": true
+  },
+  "paper_claims_supported": [
+    "the host-client TCP split-path topology remains correct over the target client and dimension grid in the modular preflight representation",
+    "APBR, k-fragment splitting, k0 dummy padding, independent permutation and aggregate-only recovery compose without mismatches in the preflight runner"
+  ],
+  "paper_claims_not_supported": [
+    "formal OpenFHE split-path correctness",
+    "formal runtime or communication measurements",
+    "FL utility",
+    "RLWE security",
+    "unlinkability"
+  ],
+  "next_required_step": "wire OpenFHE material generation into the same host-client split-path runner and repeat the formal correctness matrix"
+}

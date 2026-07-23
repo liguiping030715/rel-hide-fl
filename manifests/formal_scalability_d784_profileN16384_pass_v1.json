@@ -1,0 +1,62 @@
+{
+  "manifest_schema": "formal_scalability_batch_manifest_v1",
+  "id": "formal_scalability_d784_profileN16384_pass_v1",
+  "status": "PASS",
+  "formal": true,
+  "profile": {
+    "ring_dim": 16384,
+    "note": "Profile B fixed ring dimension for 784/3072/10000 matrix comparability."
+  },
+  "release_manifest": "manifests/formal_evaluation_release_v4.json",
+  "release_manifest_sha256": "87E046C06EA905B3752A65612FEC071530FAEE112B4B3783E9E661F6D9433BAF",
+  "sanity_manifest": "manifests/formal_sanity_pass_v4_profileN16384.json",
+  "sanity_manifest_sha256": "EBEB5284D78CAF98E3EADE5A9AB436DCA32F432E03CAD6B2EABEF11C2AD3EFA8",
+  "scalability_runner": "scripts/run_formal_scalability_matrix.ps1",
+  "scalability_runner_sha256": "7D521429E283D0B73BAB00FA21A897953D55985AD2582DFEDEA59B8B594B4782",
+  "output_dir": "results/formal/scalability/phase1_profileN16384_d784",
+  "summary": "results/formal/scalability/phase1_profileN16384_d784/summary.json",
+  "summary_sha256": "CF2FB3FBA6713FBAA9794DC27E38E45C4FC8C70C347ED76CDC515014BFFAE9DD",
+  "csv": "results/formal/scalability/phase1_profileN16384_d784/formal_scalability_matrix.csv",
+  "csv_sha256": "1A375B569A240FF51EE18A5CE3AF8063C531F2930FC7BF1A4B22C7F637FD4271",
+  "by_client_stats_csv": "results/formal/scalability/phase1_profileN16384_d784/formal_scalability_by_clients.csv",
+  "by_client_stats_sha256": "0A9D3F7AACF90ADB36D0073E32194D8858A80EAB6350F5D7C3AD09D2DF2DEF72",
+  "matrix": {
+    "clients": [
+      5,
+      10,
+      20,
+      30,
+      50
+    ],
+    "dimensions": [
+      784
+    ],
+    "ring_dim": 16384,
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "sample_count": 75
+  },
+  "observed": {
+    "passed": 75,
+    "failed": 0,
+    "max_q_domain_diff_linf": 0.0,
+    "total_q_domain_mismatch_count": 0.0
+  },
+  "pass_criteria": {
+    "all_samples_pass": true,
+    "q_domain_diff_linf_zero": true,
+    "q_domain_mismatch_count_zero": true,
+    "wire_roundtrip_all": true,
+    "apbr_sum_preserved_all": true
+  },
+  "communication_scope": {
+    "total_bytes_field": "total_wire_bytes from serialized DCRTPoly split-path relay fragments",
+    "client_upload_tcp_bytes_measured": false,
+    "note": "OpenFHE DCRTPoly split-path integration runner reports serialized fragment wire bytes. Do not describe this as full Docker/WSL TCP byte measurement."
+  },
+  "next_step": "run Profile B N=16384 dimensions 3072 and 10000 if continuing Phase 1 matrix"
+}

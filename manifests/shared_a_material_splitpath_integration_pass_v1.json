@@ -1,0 +1,59 @@
+{
+  "manifest_schema": "shared_a_material_splitpath_integration_manifest_v1",
+  "status": "PASS",
+  "formal_results_started": false,
+  "scope": "shared_a_rlwe_style_material_splitpath_integration",
+  "openfhe_dcrtpoly_integrated": false,
+  "source": {
+    "runner": "scripts/host_client_preflight.py",
+    "runner_sha256": "F70A5ED58C090B48545610C1827B1D977F475D6E00A134D5CF5D531747C3016B"
+  },
+  "material_provider": {
+    "name": "shared_a_rlwe_style_modular",
+    "shared_a": true,
+    "body_formula": "b_i = a*sk_i + e_i + m_i mod q",
+    "secret_distribution": "coefficient-wise uniform over {-2,-1,0,1,2}",
+    "error_modes_tested": ["zero", "dgg32"],
+    "openfhe_dcrtpoly_objects": false
+  },
+  "cases": [
+    {
+      "case_id": "c2_d16_zero",
+      "result": "results/preflight/integration_shared_a/c2_d16_zero/summary.json",
+      "result_sha256": "F994A7A53010FBA5908CE4A6B39605CB230B8398EA844220FFDB41D750A4FC72",
+      "clients": 2,
+      "dimension": 16,
+      "noise": "zero",
+      "max_abs_error_quantized": 0,
+      "mismatch_count": 0,
+      "client_to_path_conservation": true,
+      "path_to_cs_conservation": true
+    },
+    {
+      "case_id": "c10_d784_dgg32",
+      "result": "results/preflight/integration_shared_a/c10_d784_dgg32/summary.json",
+      "result_sha256": "E27DB56F9200F09FBC696B927D9002168E827AD6738F79FAA14AADE1FDCC1DA3",
+      "clients": 10,
+      "dimension": 784,
+      "noise": "dgg32",
+      "aggregate_error_linf": 37,
+      "max_abs_error_quantized": 0,
+      "mismatch_count": 0,
+      "client_to_path_conservation": true,
+      "path_to_cs_conservation": true
+    }
+  ],
+  "paper_claims_supported": [
+    "shared-a key/body material is generated at clients before four-path delivery",
+    "key material is split across S1/S2 and body material is split across T1/T2",
+    "CS performs aggregate-only recovery through B_agg - a*S_agg in the modular integration runner",
+    "APBR, fragmentation, dummy padding and permutation preserve exact aggregate recovery in both tested integration cases"
+  ],
+  "paper_claims_not_supported": [
+    "OpenFHE DCRTPoly material generation inside the split-path runner",
+    "formal OpenFHE split-path benchmark",
+    "FL utility",
+    "RLWE security or unlinkability"
+  ],
+  "next_required_step": "replace the modular material provider with an OpenFHE DCRTPoly-backed provider and rerun these two integration cases"
+}

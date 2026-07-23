@@ -1,0 +1,51 @@
+{
+  "manifest_schema": "formal_scalability_full_manifest_v1",
+  "id": "formal_scalability_phase1_profileN16384_pass_v1",
+  "status": "PASS",
+  "formal": true,
+  "release_manifest": "manifests/formal_evaluation_release_v4.json",
+  "release_manifest_sha256": "87E046C06EA905B3752A65612FEC071530FAEE112B4B3783E9E661F6D9433BAF",
+  "sanity_manifest": "manifests/formal_sanity_pass_v4_profileN16384.json",
+  "sanity_manifest_sha256": "EBEB5284D78CAF98E3EADE5A9AB436DCA32F432E03CAD6B2EABEF11C2AD3EFA8",
+  "component_manifests": [
+    "manifests/formal_scalability_d784_profileN16384_pass_v1.json",
+    "manifests/formal_scalability_d3072_d10000_profileN16384_pass_v1.json"
+  ],
+  "output_dir": "results/formal/scalability/phase1_profileN16384_full",
+  "summary": "results/formal/scalability/phase1_profileN16384_full/summary.json",
+  "summary_sha256": "D1EDBF981AC46BA8D06C786E633199E605AA63895AEC268986C34EF67CF4CFBC",
+  "csv": "results/formal/scalability/phase1_profileN16384_full/formal_scalability_matrix_full.csv",
+  "csv_sha256": "D94B3FB76056874F32CD38B18B320D9FD03E3C10EB1532742DF7309C8BFEE088",
+  "by_dimension_client_stats_csv": "results/formal/scalability/phase1_profileN16384_full/formal_scalability_by_dimension_clients.csv",
+  "by_dimension_client_stats_sha256": "1557197453BF2FD120652F4619C69B3B605C0EA89EBB69CAE072FA0ACD4B2F28",
+  "matrix": {
+    "clients": [
+      5,
+      10,
+      20,
+      30,
+      50
+    ],
+    "dimensions": [
+      784,
+      3072,
+      10000
+    ],
+    "ring_dim": 16384,
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "sample_count": 225
+  },
+  "observed": {
+    "passed": 225,
+    "failed": 0,
+    "max_q_domain_diff_linf": 0,
+    "total_q_domain_mismatch_count": 0
+  },
+  "caveat": "Communication totals are serialized DCRTPoly split-path relay bytes from the integration runner, not full Docker/WSL TCP traffic.",
+  "next_step": "controlled baselines or paper table/figure generation"
+}

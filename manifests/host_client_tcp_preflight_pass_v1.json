@@ -1,0 +1,59 @@
+{
+  "manifest_schema": "host_client_tcp_preflight_manifest_v1",
+  "status": "PASS",
+  "formal_results_started": false,
+  "scope": "protocol_topology_preflight_only",
+  "openfhe_integrated": false,
+  "paper_claims_supported": [
+    "local TCP topology can carry the four material paths",
+    "APBR preserves path sums in the preflight modular representation",
+    "fragment and dummy counts match c_r*k+k0",
+    "aggregate-only recovery is exact in the preflight modular representation",
+    "sender/receiver byte conservation is recorded for client-to-path and path-to-CS links"
+  ],
+  "paper_claims_not_supported": [
+    "formal OpenFHE runtime",
+    "formal OpenFHE communication",
+    "RLWE security",
+    "unlinkability",
+    "malicious shuffler detection",
+    "network-adversary security",
+    "FL utility"
+  ],
+  "source": {
+    "script": "scripts/host_client_preflight.py",
+    "script_sha256": "820BF5CA88254FDCEB5D1FBFBBBF1BEFF99DD1F909465CB98BE448107B55C610",
+    "config": "configs/default.json",
+    "config_sha256": "9C237B6F499E94159B2A1A69EA50A5C4EF0F42A1B0C4595D38D80E8CB7051EC9"
+  },
+  "cases": [
+    {
+      "case_id": "c2_d16_zero_tcp",
+      "result": "results/preflight/c2_d16_zero_tcp/summary.json",
+      "result_sha256": "E4EE18B22D9EA2B8BDEBF4BB307AC9E215F211B9A6E5580B158C3C6D2188813F",
+      "clients": 2,
+      "dimension": 16,
+      "k": 2,
+      "k0": 2,
+      "max_abs_error_quantized": 0,
+      "mismatch_count": 0,
+      "client_to_path_conservation": true,
+      "path_to_cs_conservation": true
+    },
+    {
+      "case_id": "c10_d784_zero_tcp",
+      "result": "results/preflight/c10_d784_zero_tcp/summary.json",
+      "result_sha256": "857237D8201B5D0F0B1178A4BC391CF7C12B3ADDA97BCBC5C98AF1A2543C1B8B",
+      "clients": 10,
+      "dimension": 784,
+      "k": 2,
+      "k0": 2,
+      "expected_fragments_per_path": 22,
+      "max_abs_error_quantized": 0,
+      "mismatch_count": 0,
+      "client_to_path_conservation": true,
+      "path_to_cs_conservation": true
+    }
+  ],
+  "next_required_step": "connect the same role boundary to the OpenFHE-backed protocol executable before producing formal paper results"
+}

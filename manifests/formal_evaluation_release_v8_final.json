@@ -1,0 +1,218 @@
+{
+  "formal_evaluation_plan": {
+    "ablations": [
+      "full",
+      "no_dummy",
+      "no_apbr",
+      "k1"
+    ],
+    "controlled_baselines": [
+      "plain_aggregate",
+      "degree_one_shamir_shuffle_proxy",
+      "openfhe_native_bgv_only",
+      "four_path_sum_only",
+      "shuffle_only",
+      "full_protocol"
+    ],
+    "fl_utility": {
+      "datasets": [
+        "MNIST",
+        "CIFAR-10"
+      ],
+      "interpretation": "quantized-trajectory equivalence sanity check",
+      "route_mode": "protocol"
+    },
+    "multiblock_scaling": {
+      "clients": [
+        10,
+        30,
+        50
+      ],
+      "dimensions": [
+        8192,
+        32768,
+        32769,
+        65536,
+        131072
+      ],
+      "repetitions": 5,
+      "samples": 225,
+      "seeds": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    "one_block_scalability": {
+      "clients": [
+        5,
+        10,
+        20,
+        30,
+        50
+      ],
+      "dimensions": [
+        784,
+        3072,
+        10000
+      ],
+      "repetitions": 5,
+      "samples": 225,
+      "seeds": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    "output_directories": {
+      "ablations": "results/formal_v8/ablations",
+      "controlled_baselines": "results/formal_v8/controlled_baselines",
+      "fl_utility": "results/formal_v8/fl_utility",
+      "multiblock": "results/formal_v8/multiblock_scaling",
+      "scalability": "results/formal_v8/scalability"
+    },
+    "stale_results_policy": "exclude every pre-v8 result from v8 tables and figures"
+  },
+  "gates": {
+    "P3": {
+      "path": "results/certificates/v8_rc1/p3_certificate.json",
+      "sha256": "75f0e9212b73036513080b104541309d73e754f4d2085132e50ff4a59cfd36cf",
+      "status": "PASS_V8_P3_PARAMETER_SAMPLER_IMPLEMENTATION_CERTIFICATE"
+    },
+    "control_barrier": {
+      "path": "manifests/route_a_v8_control_barrier_preflight_pass_v1.json",
+      "sha256": "459da42cbf332b1cd8e10a7ea58731564c03b27398c359de1c69535d048602a0",
+      "status": "PASS"
+    },
+    "docker_wsl_topology": {
+      "path": "manifests/route_a_v8_docker_wsl_topology_preflight_pass_v1.json",
+      "sha256": "ce20e6d90363eb24f656004dcbf2e995e65cb2e71a3e3a5d9d6b4d1adaa7af7f",
+      "status": "PASS"
+    }
+  },
+  "implementation": {
+    "backend": "OpenFHE 1.2.3 low-level DCRTPoly plus native BGVRNS baseline",
+    "docker_client_image": "route-a-v8-client:rc1",
+    "docker_client_image_id": "sha256:8c789f72840193edc1520f8f8d723d52446a4043c2e02c7d361633f9d22cd22a",
+    "error_sampler": "DCRTPoly::DggType(3.2), Peikert finite support [-39,39]",
+    "packing": "true polynomial-CRT idempotent via inverse/forward negacyclic NTT",
+    "permutation": "Fisher-Yates with rejection-sampled UniformBelow",
+    "rlwe_body_formula": "b_i = a*sk_i + t*e_i + iota_t_to_q(Pack_pp(z_i))",
+    "secret_sampler": "DCRTPoly::TugType centered ternary",
+    "shared_public_a": "sampled once by Setup with DCRTPoly::DugType and bound into setup_id",
+    "wsl_binary_dir": "/home/liguiping/openfhe_splitpath_build_v8_rc1"
+  },
+  "post_run_requirement": {
+    "chain": "release -> raw runs -> aggregate CSV -> paper tables/figures",
+    "results_manifest": "manifests/formal_evaluation_results_v8_final.json"
+  },
+  "profile": {
+    "N": 16384,
+    "Q_eff": "1267650594583527972906814636033",
+    "error_sigma": 3.2,
+    "error_support": [
+      -39,
+      39
+    ],
+    "intcrt_moduli": [
+      131071,
+      131101
+    ],
+    "k": 2,
+    "k0": 2,
+    "max_clients": 50,
+    "profile_canonical_sha256": "309397898db483f8d57a75458a35ef1b1b91f2eafbbe43a35734534ce642fb9f",
+    "profile_capacity": 32768,
+    "t": "2199023288321",
+    "tower_moduli": [
+      "1125899904679937",
+      "1125899903991809"
+    ]
+  },
+  "release": {
+    "at_least_128_bit_pq_claimed": false,
+    "exact_concrete_security_bits_claimed": false,
+    "formal_evaluation_authorized": true,
+    "formal_results_from_prior_releases_allowed": false,
+    "id": "formal_evaluation_release_v8_final",
+    "security_claim_mode": "conservative",
+    "status": "FROZEN_FOR_FORMAL_EVALUATION"
+  },
+  "schema": "formal_evaluation_release_manifest_v8",
+  "source_and_binary": {
+    "bgv_only_binary": "build/openfhe_bgv_only_baseline",
+    "bgv_only_binary_sha256": "239ee034543f6bc49a2e9018f5153f5dbb4a546795d4f69dd620f7704c54a1f9",
+    "deployed_binary_sha256": {
+      "bgv_only": "239ee034543f6bc49a2e9018f5153f5dbb4a546795d4f69dd620f7704c54a1f9",
+      "randomness_selftest": "1c09c5851204f69b3515d06ff211563bca659b3c5da4c4a6681dcfac87781881",
+      "shamir_proxy": "692b18517ff03ca1d749810213b9420fe83a76a9352c01dc976b7447f1b74e9f",
+      "wire_integration": "53b50e1b15a98dd34498d7a4f9d3424047ea6cd0693a23222e44eb75ff756ac7"
+    },
+    "scripts": {
+      "ablations": {
+        "path": "scripts/run_ablation_matrix.ps1",
+        "sha256": "2d62d1eaabc0805c85c6a32b6911a4239ef9fb61d13b21a97817a387c0af0412"
+      },
+      "artifact_generation": {
+        "path": "scripts/generate_evaluation_artifacts.py",
+        "sha256": "20a850cf16e7fb12f6f84b0c968e319945da5c01ff3e555cc2b9eb066b1ed821"
+      },
+      "controlled_baselines": {
+        "path": "scripts/run_controlled_baselines.ps1",
+        "sha256": "e250f4d1a1b63a33757247b528a9b0938e9342fd76286860a48212aa48db82bd"
+      },
+      "docker_wsl_preflight": {
+        "path": "scripts/run_v8_docker_wsl_topology_preflight.py",
+        "sha256": "e226f2497e806271527f5638b3e2f004c0f2b33d31a70dc8d0e0ad75e59c4cbe"
+      },
+      "fl_utility": {
+        "path": "scripts/run_fl_utility.py",
+        "sha256": "24a983516574a08e2a1a3e6d5d620f9dcc692c49c96517265063819d1af23337"
+      },
+      "formal_scalability": {
+        "path": "scripts/run_formal_scalability_matrix.ps1",
+        "sha256": "777cba48ce0804f9588787549856ad5a9195aa9532fc4018aae3f7c6ca6f1bf4"
+      },
+      "multiblock_scaling": {
+        "path": "scripts/run_multiblock_scaling_matrix.ps1",
+        "sha256": "4ee2789dd06ec8953d18667f2e8773592099af34c1c50599dacad98a2f9441cf"
+      },
+      "p3_certificate_builder": {
+        "path": "scripts/build_v8_p3_certificate.py",
+        "sha256": "a8f6d85ded8f0a1705b807b8ee9745cb31f7399bba02217c4e5ec8dc3dad17b2"
+      },
+      "tcp_preflight": {
+        "path": "scripts/run_v8_distributed_tcp_preflight.py",
+        "sha256": "9e775b2aa4ef3decf65411fab3f261fbf44c5c8b737b652719e9f7498722b84a"
+      }
+    },
+    "shamir_proxy_binary": "build/shamir_shuffle_proxy_baseline",
+    "shamir_proxy_binary_sha256": "692b18517ff03ca1d749810213b9420fe83a76a9352c01dc976b7447f1b74e9f",
+    "sources": {
+      "bgv_only_cpp": {
+        "path": "src/openfhe_bgv_only_baseline.cpp",
+        "sha256": "5a346d9513728b1330094ae091aa0be9f0222a5353207788755e63e0728d4620"
+      },
+      "cmake": {
+        "path": "CMakeLists.txt",
+        "sha256": "4e4f38e1594706136e5b6452220a5ce5f39667277e223e526fe3ae04be712406"
+      },
+      "randomness_header": {
+        "path": "src/v8_randomness.h",
+        "sha256": "26e0db14b3d33b0dbf57cd7323846ffd3a391630ca24fe2ad598d38d7cae891e"
+      },
+      "shamir_proxy_cpp": {
+        "path": "src/shamir_shuffle_proxy_baseline.cpp",
+        "sha256": "daab4ad4c491c80cf44a10fd7a7dba78bfe0a8da67d4771e4afe91a6186095c5"
+      },
+      "wire_integration_cpp": {
+        "path": "src/openfhe_dcrtpoly_wire_integration.cpp",
+        "sha256": "31aac74199f6ad35e67230b0895c46cb3bb72d7b92f563efb0b4c69ada6683f3"
+      }
+    },
+    "wire_integration_binary": "build/openfhe_dcrtpoly_wire_integration",
+    "wire_integration_binary_sha256": "53b50e1b15a98dd34498d7a4f9d3424047ea6cd0693a23222e44eb75ff756ac7",
+    "wire_integration_cpp": "src/openfhe_dcrtpoly_wire_integration.cpp",
+    "wire_integration_cpp_sha256": "31aac74199f6ad35e67230b0895c46cb3bb72d7b92f563efb0b4c69ada6683f3"
+  }
+}

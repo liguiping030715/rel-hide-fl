@@ -1,0 +1,33 @@
+{
+  "manifest_schema": "formal_sanity_pass_manifest_v2",
+  "id": "formal_sanity_pass_v2",
+  "status": "PASS",
+  "formal": false,
+  "release_manifest": "manifests/formal_evaluation_release_v2.json",
+  "release_manifest_sha256": "80E5FF508E353F6C57AEFB12526FDBE0ECF46E5AE61B4221A4F268FE0FEA2B88",
+  "summary": "results/preflight/formal_sanity_v2/summary.json",
+  "summary_sha256": "FE3C113906A732CD30BD9A07910ABB7CB1CFD62D2C0E4077D18A9127591C4495",
+  "csv": "results/preflight/formal_sanity_v2/formal_sanity_matrix.csv",
+  "csv_sha256": "20D7DCA92B1AC5746591F7FF7AB41D3F7EBF6DDD6B20C20D17A83CBA76B07985",
+  "clients": 5,
+  "dimension": 784,
+  "noise": "dgg32",
+  "seeds": [
+    2024,
+    2025,
+    2026
+  ],
+  "case_count": 3,
+  "passed": 3,
+  "failed": 0,
+  "required_checks": {
+    "status_pass": true,
+    "wire_serialization_roundtrip": true,
+    "wire_aggregate_equals_local": true,
+    "apbr_sum_preserved_all_paths": true,
+    "q_domain_diff_linf_zero": true,
+    "q_domain_mismatch_count_zero": true
+  },
+  "next_step": "formal_scalability_first_batch_d784",
+  "note": "Sanity run only; not used as formal Evaluation performance sample."
+}

@@ -1,0 +1,57 @@
+{
+  "manifest_schema": "controlled_baseline_release_manifest_v2",
+  "id": "controlled_baseline_release_v2",
+  "status": "FROZEN_FOR_PROTOCOL_CONSISTENT_CONTROLLED_BASELINES",
+  "formal_baseline_started": false,
+  "relation_to_phase1": "Baseline rerun release bound to formal_evaluation_release_v5 protocol-consistent material semantics.",
+  "baseline_definitions": {
+    "plain_aggregate": "Plaintext vector summation; theoretical minimum local aggregation baseline.",
+    "openfhe_bgv_only": "Native OpenFHE BGV/RNS Encrypt, EvalAdd, Decrypt; no split-path APBR-LPSU.",
+    "shuffle_only": "APBR, k-fragment splitting, zero-sum dummy padding and permutation over DCRTPoly messages; no RLWE key-removal semantics.",
+    "full_protocol": "APBR-LPSU full split-path DCRTPoly protocol."
+  },
+  "source_and_binary": {
+    "wire_integration_cpp": "src/openfhe_dcrtpoly_wire_integration.cpp",
+    "wire_integration_cpp_sha256": "747B100A8D28375633DA6AE60F357B2CE310390591D4E12CD6CD137286A73600",
+    "bgv_only_cpp": "src/openfhe_bgv_only_baseline.cpp",
+    "bgv_only_cpp_sha256": "5A346D9513728B1330094AE091AA0BE9F0222A5353207788755E63E0728D4620",
+    "cmake": "CMakeLists.txt",
+    "cmake_sha256": "3B6B1A894F5E58F01946CA86210766B7D761F764BAD01A4931BF5F10845308B5",
+    "controlled_baseline_runner": "scripts/run_controlled_baselines.ps1",
+    "controlled_baseline_runner_sha256": "71529BFE83AC4FCAF92195998671EFA4CFD814F4D62BC83ACDC4B65E6A3DD03E",
+    "wire_integration_binary": "build/openfhe_dcrtpoly_wire_integration",
+    "wire_integration_binary_sha256": "E32918124E1BCA9A1533C0CD7478E1A338B382FA5991C3B7D23430D1DC3CE28F",
+    "bgv_only_binary": "build/openfhe_bgv_only_baseline",
+    "bgv_only_binary_sha256": "EAD49827980C1D29514CFBCA9C3CF9F47CA9D30BD5A1E0B0587DEE0D0130D7D4"
+  },
+  "matrix": {
+    "variants": [
+      "plain_aggregate",
+      "openfhe_bgv_only",
+      "shuffle_only",
+      "full_protocol"
+    ],
+    "clients": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "dimension": 784,
+    "ring_dim": 16384,
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "samples": 300,
+    "plaintext_modulus": "2199023288321"
+  },
+  "correctness_requirement": {
+    "encoded_plaintext_diff_linf": 0,
+    "encoded_plaintext_mismatch_count": 0
+  },
+  "material_formula": "full_protocol uses b_i=a*sk_i+t*e_i+iota_t_to_q(m_i); shuffle_only uses message records only; openfhe_bgv_only uses native OpenFHE BGV/RNS."
+}

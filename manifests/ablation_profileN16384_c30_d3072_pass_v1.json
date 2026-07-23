@@ -1,0 +1,41 @@
+{
+  "manifest_schema": "ablation_pass_manifest_v1",
+  "id": "ablation_profileN16384_c30_d3072_pass_v1",
+  "status": "PASS",
+  "formal": true,
+  "release_manifest": "manifests/ablation_release_v1.json",
+  "release_manifest_sha256": "19AEA38BE87CDE788BAA88834D69F6D9E1ED7F08239A63EF7E0E859B17729AF7",
+  "output_dir": "results/formal/ablations/profileN16384_c30_d3072",
+  "summary": "results/formal/ablations/profileN16384_c30_d3072/summary.json",
+  "summary_sha256": "EB8BC4B4E211CC38E6B725E67D48D88ED951E19B3D4736C54C68312125DD7323",
+  "csv": "results/formal/ablations/profileN16384_c30_d3072/ablation_matrix.csv",
+  "csv_sha256": "A36DCBEA09E1B0C433DF123DBF51815626C696A143A4278A2FC7DDE0F1FAD700",
+  "by_variant_stats_csv": "results/formal/ablations/profileN16384_c30_d3072/ablation_by_variant.csv",
+  "by_variant_stats_sha256": "EBB7634F6E9935515ACBFD6292A480DDDFB9553BCE4A1E38D8268EB5FF598738",
+  "matrix": {
+    "ablations": [
+      "full",
+      "no_dummy",
+      "no_apbr",
+      "k1"
+    ],
+    "clients": 30,
+    "dimension": 3072,
+    "ring_dim": 16384,
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "sample_count": 60
+  },
+  "observed": {
+    "passed": 60,
+    "failed": 0,
+    "max_q_domain_diff_linf": 0.0,
+    "total_q_domain_mismatch_count": 0.0
+  },
+  "scope": "Focused APBR/SplitMix overhead ablation at c=30,d=3072. k1 and no_dummy reduce transmitted fragment count; no_apbr preserves fragment count but removes APBR mask sampling/addition.",
+  "next_step": "generate Evaluation tables/figures or run FL utility"
+}

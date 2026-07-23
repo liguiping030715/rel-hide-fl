@@ -1,0 +1,38 @@
+{
+  "manifest_schema": "fl_utility_pass_manifest_v1",
+  "id": "fl_utility_mnist_cifar10_routea_equivalence_pass_v1",
+  "status": "PASS",
+  "formal": true,
+  "script": "scripts/run_fl_utility.py",
+  "script_sha256": "9F7CC6EC0D111063C6636EA53DBC5FBC904D26A73E9954231FC3EF037FA594F5",
+  "output_dir": "results/formal/fl_utility",
+  "summary": "results/formal/fl_utility/summary.json",
+  "summary_sha256": "F438894D55AF00A922E1A2AC6A6A1A783B9A4E4FB457AB482650173FC9A47421",
+  "csv": "results/formal/fl_utility/fl_utility_case_summary.csv",
+  "csv_sha256": "A38C33036837A83989A05A4BD6D5B55169A0434D9155C101F3BE79DF1E9B7D25",
+  "matrix": {
+    "datasets": [
+      "mnist",
+      "cifar10"
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "clients": 10,
+    "rounds": 20,
+    "train_subset": 10000,
+    "test_subset": 2000,
+    "ring_dim": 16384
+  },
+  "observed": {
+    "cases": 6,
+    "passed": 6,
+    "failed": 0,
+    "max_route_quantized_diff_linf": 0,
+    "total_route_block_mismatches": 0
+  },
+  "scope": "Plain floating-point FL, quantized plaintext FL, and Route A aggregate-equivalent FL utility sanity. Route A trajectory equals quantized plaintext trajectory by construction after exact block-wise aggregate verification.",
+  "next_step": "generate Evaluation tables and figures"
+}

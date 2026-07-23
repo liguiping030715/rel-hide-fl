@@ -1,0 +1,42 @@
+{
+  "manifest_schema": "openfhe_backend_matrix_pilot_manifest_v1",
+  "status": "PASS",
+  "formal_results_started": false,
+  "scope": "openfhe_backend_matrix_only_not_splitpath_formal_result",
+  "source": {
+    "runner": "scripts/run_openfhe_backend_matrix.ps1",
+    "runner_sha256": "73C66C2302F56B47A53331AEDC41A6252EDBB8E00A24EA77BFEF80E738EBA06D",
+    "old_binary_source": "experiments/openfhe_bgv_local_emulation_full/build/openfhe_protocol_eval_bgv"
+  },
+  "matrix": {
+    "datasets": ["mnist", "cifar10"],
+    "clients": [5, 10],
+    "seeds": [2024],
+    "case_count": 4,
+    "passed": 4,
+    "failed": 0
+  },
+  "results": {
+    "directory": "results/preflight/openfhe_backend_matrix/openfhe_backend_matrix_20260715_160417",
+    "summary": "results/preflight/openfhe_backend_matrix/openfhe_backend_matrix_20260715_160417/summary.json",
+    "summary_sha256": "907317391FFCAAB2F50600C44552B030527607C9B7F591659DCA9245FCDF2F1F",
+    "csv": "results/preflight/openfhe_backend_matrix/openfhe_backend_matrix_20260715_160417/openfhe_backend_matrix.csv",
+    "csv_sha256": "BA04A3149BE916235849EADF3FD91E72BABFC6DB3B62DAB66C3E860D3DA47950"
+  },
+  "acceptance": {
+    "all_openfhe_mismatch_count_zero": true,
+    "all_protocol_mismatch_count_zero": true
+  },
+  "paper_claims_supported": [
+    "the retained OpenFHE-BGV backend runs on MNIST-shaped and CIFAR10-shaped smoke cases"
+  ],
+  "paper_claims_not_supported": [
+    "new host-client split-path formal correctness",
+    "new host-client split-path runtime",
+    "new host-client split-path communication",
+    "Docker client deployment",
+    "FL utility",
+    "unlinkability or RLWE security"
+  ],
+  "next_required_step": "connect OpenFHE material generation to the new host-client split-path runner"
+}

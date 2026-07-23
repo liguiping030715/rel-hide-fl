@@ -1,0 +1,60 @@
+{
+  "manifest_schema": "formal_scalability_batch_manifest_v1",
+  "id": "formal_scalability_d784_pass_v1",
+  "status": "PASS_NONPROFILE_RINGDIM_SMOKE",
+  "formal": false,
+  "release_manifest": "manifests/formal_evaluation_release_v2.json",
+  "release_manifest_sha256": "80E5FF508E353F6C57AEFB12526FDBE0ECF46E5AE61B4221A4F268FE0FEA2B88",
+  "sanity_manifest": "manifests/formal_sanity_pass_v2.json",
+  "sanity_manifest_sha256": "D2BFCB7A4925AF3C9FF0BB5424D1F904FBA7C34EA4D2F82EFE9488BDCAC4386D",
+  "scalability_runner": "scripts/run_formal_scalability_matrix.ps1",
+  "scalability_runner_sha256": "7D521429E283D0B73BAB00FA21A897953D55985AD2582DFEDEA59B8B594B4782",
+  "output_dir": "results/formal/scalability/phase1_d784",
+  "summary": "results/formal/scalability/phase1_d784/summary.json",
+  "summary_sha256": "1AD389A56AD2903006021CC6816C41166DC0518310764455590F22B1406AA0E0",
+  "csv": "results/formal/scalability/phase1_d784/formal_scalability_matrix.csv",
+  "csv_sha256": "3A6BED264E5622D50F403029C27FBE7A25732C7511E042BECF782A60D7B4B468",
+  "by_client_stats_csv": "results/formal/scalability/phase1_d784/formal_scalability_by_clients.csv",
+  "by_client_stats_sha256": "2583E266ABAD4C5415D2FF437094EB96ED4043BCD5906C1D7AC53EC21BFB9AF1",
+  "matrix": {
+    "clients": [
+      5,
+      10,
+      20,
+      30,
+      50
+    ],
+    "dimensions": [
+      784
+    ],
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "sample_count": 75
+  },
+  "pass_criteria": {
+    "all_samples_pass": true,
+    "q_domain_diff_linf_zero": true,
+    "q_domain_mismatch_count_zero": true,
+    "wire_roundtrip_all": true,
+    "apbr_sum_preserved_all": true
+  },
+  "observed": {
+    "passed": 75,
+    "failed": 0,
+    "max_q_domain_diff_linf": 0.0,
+    "total_q_domain_mismatch_count": 0.0
+  },
+  "communication_scope": {
+    "total_bytes_field": "total_wire_bytes from serialized DCRTPoly split-path relay fragments",
+    "client_upload_tcp_bytes_measured": false,
+    "note": "This batch is the OpenFHE DCRTPoly split-path integration runner. It should be reported as serialized split-path wire bytes, not full Docker/WSL TCP traffic."
+  },
+  "next_step": "inspect ring_dim/profile choice before expanding to d=3072 and d=10000",
+  "use_for_profile_b_paper_evaluation": false,
+  "superseded_by": "formal_scalability_d784_profileN16384_pass_v1",
+  "correction_note": "This batch used ring_dim=1024. It is retained as a runner smoke test only and must not be used as the Profile B formal paper data. Profile B formal runs use N=16384."
+}

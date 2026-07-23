@@ -1,0 +1,57 @@
+{
+  "manifest_schema": "ablation_release_manifest_v2",
+  "id": "ablation_release_v2",
+  "status": "FROZEN_FOR_PROTOCOL_CONSISTENT_APBR_SPLITMIX_ABLATIONS",
+  "formal_ablation_started": false,
+  "relation_to_previous": "Ablation rerun release bound to formal_evaluation_release_v5 protocol-consistent material semantics.",
+  "source_and_binary": {
+    "wire_integration_cpp": "src/openfhe_dcrtpoly_wire_integration.cpp",
+    "wire_integration_cpp_sha256": "747B100A8D28375633DA6AE60F357B2CE310390591D4E12CD6CD137286A73600",
+    "cmake": "CMakeLists.txt",
+    "cmake_sha256": "3B6B1A894F5E58F01946CA86210766B7D761F764BAD01A4931BF5F10845308B5",
+    "ablation_runner": "scripts/run_ablation_matrix.ps1",
+    "ablation_runner_sha256": "2D1DCD45C3DEBEE84CECE1EC48BF44E2B02F5E69C99E6B714A5C2C0C040E9D5F",
+    "wire_integration_binary": "build/openfhe_dcrtpoly_wire_integration",
+    "wire_integration_binary_sha256": "E32918124E1BCA9A1533C0CD7478E1A338B382FA5991C3B7D23430D1DC3CE28F"
+  },
+  "ablations": {
+    "full": {
+      "apbr": true,
+      "k0": 2,
+      "k": 2
+    },
+    "no_dummy": {
+      "apbr": true,
+      "k0": 0,
+      "k": 2
+    },
+    "no_apbr": {
+      "apbr": false,
+      "k0": 2,
+      "k": 2
+    },
+    "k1": {
+      "apbr": true,
+      "k0": 2,
+      "k": 1
+    }
+  },
+  "matrix": {
+    "clients": 30,
+    "dimension": 3072,
+    "ring_dim": 16384,
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "samples": 60,
+    "plaintext_modulus": "2199023288321"
+  },
+  "material_formula": "b_i=a*sk_i+t*e_i+iota_t_to_q(m_i) over OpenFHE DCRTPoly",
+  "correctness_requirement": {
+    "encoded_plaintext_diff_linf": 0,
+    "encoded_plaintext_mismatch_count": 0
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "four_path_sum_only_baseline_manifest_v2",
+  "status": "PASS",
+  "variant": "four_path_sum_only",
+  "samples": 75,
+  "clients": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "dimension": 784,
+  "seeds": [
+    2024,
+    2025,
+    2026
+  ],
+  "repetitions": 5,
+  "functionality": "aggregate-only split-path key/body sharing; each path locally sums client shares and relays one aggregate DCRTPoly object",
+  "correctness": "75/75 PASS, encoded_plaintext_diff_linf=0 and mismatch_count=0 for every run",
+  "communication_scope": "client upload plus path-to-CS serialized application payload; transport/control/logging/OS overhead excluded",
+  "previous_manifest": "four_path_sum_only_baseline_d784_pass_v1.json",
+  "artifacts": {
+    "csv": "results/formal/baselines/four_path_sum_only_d784/controlled_baselines_matrix.csv",
+    "csv_sha256": "ADEF4540ED31357D4060C7A08CA129BA42829C608714CAA01B74288286878863",
+    "summary": "results/formal/baselines/four_path_sum_only_d784/summary.json",
+    "summary_sha256": "29200C94ACDF728164F071CCBBB59856C61FDCD38FEAE26F4AA4BBC39788A79B",
+    "runner_script": "scripts/run_four_path_sum_only_baseline.py",
+    "runner_script_sha256": "B188351987B15E3D9918D32BDA5E330BE306AD41FB3404F28841D13011EABC7A",
+    "wire_integration_source": "src/openfhe_dcrtpoly_wire_integration.cpp",
+    "wire_integration_source_sha256": "2E1155BCD8D3A5679FAC240C88362CA9F7A3356C624E69BF0130654224E3F80A"
+  }
+}

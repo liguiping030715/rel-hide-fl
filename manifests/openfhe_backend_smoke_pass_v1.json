@@ -1,0 +1,39 @@
+{
+  "manifest_schema": "openfhe_backend_smoke_manifest_v1",
+  "status": "PASS",
+  "formal_results_started": false,
+  "scope": "openfhe_backend_smoke_only",
+  "splitpath_host_client_integrated": false,
+  "source": {
+    "wrapper_script": "scripts/run_openfhe_backend_smoke.ps1",
+    "wrapper_script_sha256": "05F93A9B3EBC8B5384DB1F527D22E7E9C2B8F07C158B2D5B548CFDF251FF483C",
+    "old_binary_source": "experiments/openfhe_bgv_local_emulation_full/build/openfhe_protocol_eval_bgv"
+  },
+  "result": {
+    "metadata": "results/preflight/openfhe_backend_smoke/openfhe_mnist_c2_s2024_20260715_155206/metadata.json",
+    "metadata_sha256": "38DD0B84598E25208DABA3A48D47E0E4358ECB94ED2C5F40DDA7BBAFBE053F29",
+    "raw_csv": "results/preflight/openfhe_backend_smoke/openfhe_mnist_c2_s2024_20260715_155206/openfhe_backend_smoke.csv",
+    "raw_csv_sha256": "EB1071C9381C0650A0CA179096DC43E0C0B6147B8AA81055E715822C5E8EF08A"
+  },
+  "case": {
+    "dataset": "mnist",
+    "clients": 2,
+    "seed": 2024,
+    "openfhe_mismatch_count": 0,
+    "protocol_mismatch_count": 0,
+    "openfhe_linf_error_quantized": 0,
+    "protocol_linf_error_quantized": 0
+  },
+  "paper_claims_supported": [
+    "the retained OpenFHE-BGV backend binary runs in Ubuntu WSL",
+    "the smoke case recovers the quantized aggregate exactly"
+  ],
+  "paper_claims_not_supported": [
+    "new host-client split-path formal correctness",
+    "new host-client split-path runtime",
+    "new host-client split-path communication",
+    "Docker client deployment",
+    "unlinkability or RLWE security"
+  ],
+  "next_required_step": "integrate OpenFHE material generation into the new host-client split-path runner"
+}

@@ -1,0 +1,51 @@
+{
+  "manifest_schema": "ablation_release_manifest_v1",
+  "id": "ablation_release_v1",
+  "status": "FROZEN_FOR_APBR_SPLITMIX_ABLATIONS",
+  "formal_ablation_started": false,
+  "relation_to_previous": "Adds --apbr switch for no-APBR ablation. Phase 1 and controlled baseline manifests remain bound to their previous releases.",
+  "source_and_binary": {
+    "wire_integration_cpp": "src/openfhe_dcrtpoly_wire_integration.cpp",
+    "wire_integration_cpp_sha256": "9381EC55FDBD897129977A26FDD374287572F0BE0587642D66A4ED97F56F2214",
+    "cmake": "CMakeLists.txt",
+    "cmake_sha256": "3B6B1A894F5E58F01946CA86210766B7D761F764BAD01A4931BF5F10845308B5",
+    "ablation_runner": "scripts/run_ablation_matrix.ps1",
+    "ablation_runner_sha256": "DAF15744184040A748F95B21D11E400B1981A1C384DB4576EF624C5ECF55BAFA",
+    "wire_integration_binary": "build/openfhe_dcrtpoly_wire_integration",
+    "wire_integration_binary_sha256": "4019C7F327E26768E0C91D964FF30D4AFA4F1FD3DC26E21AAE72044A105627BA"
+  },
+  "ablations": {
+    "full": {
+      "apbr": true,
+      "k0": 2,
+      "k": 2
+    },
+    "no_dummy": {
+      "apbr": true,
+      "k0": 0,
+      "k": 2
+    },
+    "no_apbr": {
+      "apbr": false,
+      "k0": 2,
+      "k": 2
+    },
+    "k1": {
+      "apbr": true,
+      "k0": 2,
+      "k": 1
+    }
+  },
+  "matrix": {
+    "clients": 30,
+    "dimension": 3072,
+    "ring_dim": 16384,
+    "seeds": [
+      2024,
+      2025,
+      2026
+    ],
+    "repetitions": 5,
+    "samples": 60
+  }
+}
