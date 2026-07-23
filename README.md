@@ -18,7 +18,7 @@ rel-hide-fl/
 │   └── configs/     # Experiment parameter files
 ├── data/            # Local datasets and cached tensors, ignored by Git
 ├── results/         # Generated experiment outputs, ignored by Git
-├── figures/         # Plotting scripts and generated figures
+├── figures/         # Plotting scripts for paper tables and figures
 ├── docs/            # Artifact notes and additional documentation
 ├── scripts/         # Certificate, audit, and artifact helper scripts
 ├── .gitignore
@@ -31,7 +31,8 @@ rel-hide-fl/
 - `src/crypto/`: baseline and cryptographic building blocks, including OpenFHE BGV-only baseline, DCRTPoly smoke tests, Shamir-shuffle proxy baseline, and randomness self-tests.
 - `src/protocol/`: full OpenFHE DCRTPoly split-path protocol integration.
 - `experiments/`: Python experiment runners for utility, topology, distributed preflights, and sum-only baseline measurements.
-- `scripts/`: supporting scripts for correctness certificates, provenance checks, and paper artifact generation.
+- `figures/`: plotting and paper-artifact scripts, including the v8 evaluation figure/table generator.
+- `scripts/`: supporting scripts for correctness certificates, provenance checks, and artifact audits.
 
 ## Security and Evaluation Scope
 
