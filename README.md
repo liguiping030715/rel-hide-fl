@@ -43,7 +43,7 @@ b_i = a * sk_i + t * e_i + iota(m_i)
 
 The setup process samples and publishes one common public DCRTPoly \(a\). Each client samples its own secret and error material, splits key/body materials over the four paths, and the servers apply APBR-SplitMix before aggregate recovery.
 
-The repository is intended to support reproducible local evaluation on a host machine with clients simulated by WSL processes or Docker containers. It does not claim WAN latency or production deployment measurements.
+This artifact supports local reproducible evaluation on a single host; clients can be simulated via WSL processes or Docker containers. It is not designed for WAN latency benchmarking or industrial production deployment.
 
 ## Python Dependencies
 
