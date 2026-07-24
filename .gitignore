@@ -40,3 +40,4 @@ data/**/*.npz
 # Local system files
 .DS_Store
 Thumbs.db
+release_assets/
