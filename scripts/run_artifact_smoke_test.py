@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import py_compile
+import subprocess
 import sys
 from pathlib import Path
 
@@ -21,14 +22,16 @@ REQUIRED_PATHS = [
     "experiments/baseline/bgv_only/openfhe_bgv_only_baseline.cpp",
     "experiments/baseline/shamir_shuffle_proxy/shamir_shuffle_proxy_baseline.cpp",
     "experiments/baseline/aggregate_only/run_four_path_sum_only_baseline.py",
+    "experiments/correctness/test_finite_group_compiler.py",
     "experiments/utility/run_fl_utility.py",
     "figures/plot_evaluation_figures_v8.py",
     "results/expected/correctness_summary.csv",
     "results/expected/baseline_c30_summary.csv",
     "results/sample/artifact_smoke_output.txt",
+    "results/expected/finite_group_smoke_expected.txt",
 ]
 
-FORBIDDEN_EXTENSIONS = {".json", ".log", ".pkl", ".npz", ".exe", ".dll", ".obj", ".o"}
+FORBIDDEN_EXTENSIONS = {".json", ".log", ".csv", ".pkl", ".npz", ".exe", ".dll", ".obj", ".o"}
 
 
 def fail(message: str) -> None:
@@ -72,16 +75,36 @@ def check_expected_outputs() -> None:
     correctness = (ROOT / "results/expected/correctness_summary.csv").read_text(encoding="utf-8")
     baseline = (ROOT / "results/expected/baseline_c30_summary.csv").read_text(encoding="utf-8")
     sample = (ROOT / "results/sample/artifact_smoke_output.txt").read_text(encoding="utf-8")
+    finite_group = (ROOT / "results/expected/finite_group_smoke_expected.txt").read_text(encoding="utf-8")
     required_tokens = [
         "encoded_plaintext_mismatches",
         "Full APBR-SplitMix",
         "ARTIFACT_SMOKE_TEST=PASS",
+        "FINITE_GROUP_COMPILER_SMOKE=PASS",
     ]
-    combined = "\n".join([correctness, baseline, sample])
+    combined = "\n".join([correctness, baseline, sample, finite_group])
     missing = [token for token in required_tokens if token not in combined]
     if missing:
         fail("expected output samples missing tokens: " + ", ".join(missing))
     print("[PASS] expected output samples")
+
+
+def check_finite_group_compiler() -> None:
+    script = ROOT / "experiments/correctness/test_finite_group_compiler.py"
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+    if result.returncode != 0:
+        print(result.stdout, end="")
+        fail("finite-group APBR-SplitMix invariant smoke test failed")
+    if "FINITE_GROUP_COMPILER_SMOKE=PASS" not in result.stdout:
+        fail("finite-group APBR-SplitMix invariant smoke test missing PASS token")
+    print("[PASS] finite-group APBR-SplitMix invariants")
 
 
 def check_paper_to_code_map_targets() -> None:
@@ -105,6 +128,7 @@ def main() -> int:
     check_python_syntax()
     check_forbidden_outputs()
     check_expected_outputs()
+    check_finite_group_compiler()
     check_paper_to_code_map_targets()
     print("ARTIFACT_SMOKE_TEST=PASS")
     return 0

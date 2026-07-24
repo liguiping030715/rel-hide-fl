@@ -2,5 +2,6 @@
 [PASS] Python script syntax
 [PASS] no forbidden generated outputs
 [PASS] expected output samples
+[PASS] finite-group APBR-SplitMix invariants
 [PASS] paper-to-code map targets
 ARTIFACT_SMOKE_TEST=PASS

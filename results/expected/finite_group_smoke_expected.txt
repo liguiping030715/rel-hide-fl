@@ -1,0 +1,2 @@
+[PASS] finite-group APBR-SplitMix invariants
+FINITE_GROUP_COMPILER_SMOKE=PASS

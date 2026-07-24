@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "Relation-Hiding Secure Aggregation for Federated Learning: Artifact"
+message: "If you use this artifact, please cite the associated paper."
+type: software
+authors:
+  - family-names: "Li"
+    given-names: "Guiping"
+repository-code: "https://github.com/liguiping030715/rel-hide-fl"
+version: "v1.0-paper-artifact"
+date-released: "2026-07-24"
+license: "LicenseRef-Pending"
+preferred-citation:
+  type: article
+  title: "Relation-Hiding Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm"
+  authors:
+    - family-names: "Li"
+      given-names: "Guiping"
+  year: 2026

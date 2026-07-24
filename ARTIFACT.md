@@ -47,6 +47,7 @@ Expected terminal output:
 [PASS] Python script syntax
 [PASS] no forbidden generated outputs
 [PASS] expected output samples
+[PASS] finite-group APBR-SplitMix invariants
 [PASS] paper-to-code map targets
 ARTIFACT_SMOKE_TEST=PASS
 ```
@@ -85,6 +86,16 @@ results/sample/
 ```
 
 They are not raw formal logs. They are lightweight sanity references for artifact review. Raw matrices, release manifests and large provenance bundles should be regenerated locally or attached as release assets.
+
+## Continuous Integration
+
+The repository includes `.github/workflows/artifact-smoke.yml`, which runs:
+
+```bash
+python scripts/run_artifact_smoke_test.py
+```
+
+This CI check intentionally avoids OpenFHE compilation so that it remains fast and stable on ordinary GitHub-hosted runners.
 
 ## Runtime Notes
 

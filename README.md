@@ -25,11 +25,14 @@ Expected output:
 [PASS] Python script syntax
 [PASS] no forbidden generated outputs
 [PASS] expected output samples
+[PASS] finite-group APBR-SplitMix invariants
 [PASS] paper-to-code map targets
 ARTIFACT_SMOKE_TEST=PASS
 ```
 
 The full protocol runners require a WSL/OpenFHE build compatible with the paper environment. See `ARTIFACT.md` for supported claims, expected runtime and full reproduction commands.
+
+The same smoke test is also run by the GitHub Actions workflow in `.github/workflows/artifact-smoke.yml`.
 
 ## Repository Layout
 
@@ -65,6 +68,7 @@ rel-hide-fl/
 | Paper component | Section / role | Artifact location |
 |---|---|---|
 | Material-separation framework | Section 3 | `src/material_separation/README.md` |
+| Finite-group APBR-SplitMix invariant test | Section 5 compiler | `experiments/correctness/test_finite_group_compiler.py` |
 | RLWE DCRTPoly material generation and randomness checks | Section 4 / Section 6 profile | `src/rlwe/` |
 | IntCRT and PolySubR profile checks | Section 4 / correctness certificate | `src/rlwe/packing/`, `scripts/build_polysubr_idempotent_profile.py` |
 | APBR refresh, fragmentation, dummy padding, permutation and aggregate recovery | APBR-SplitMix construction | `src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp` |

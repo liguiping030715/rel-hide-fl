@@ -1,0 +1,20 @@
+name: artifact-smoke
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  artifact-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run repository smoke test
+        run: python scripts/run_artifact_smoke_test.py

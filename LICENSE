@@ -1,0 +1,8 @@
+License pending.
+
+This artifact is provided for manuscript review and reproducibility assessment.
+Do not redistribute, sublicense, or use it for production deployment until a
+final open-source license is selected and published with the accepted artifact.
+
+The artifact depends on third-party software, including OpenFHE and Python
+packages, which remain governed by their own licenses.
