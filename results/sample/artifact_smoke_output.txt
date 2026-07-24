@@ -1,0 +1,6 @@
+[PASS] required artifact paths
+[PASS] Python script syntax
+[PASS] no forbidden generated outputs
+[PASS] expected output samples
+[PASS] paper-to-code map targets
+ARTIFACT_SMOKE_TEST=PASS

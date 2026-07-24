@@ -1,0 +1,7 @@
+variant,runtime_ms_mean,runtime_ms_std,upload_mib,relay_mib,total_mib,functionality
+Plain,0.18,0.03,0.00,0.00,0.00,in-memory lower bound
+Shamir-shuffle proxy,1.82,0.14,0.36,0.36,0.72,shuffled plaintext shares
+Native BGV profile,197.54,8.78,22.54,0.00,22.54,single-server HE reference
+Four-path aggregate-only,269.22,18.80,30.00,1.00,31.00,aggregate-only split path
+Synthetic shuffle pipeline,896.43,27.87,30.00,62.01,92.01,component-cost reference
+Full APBR-SplitMix,892.61,23.39,30.00,62.01,92.01,relation-hidden multi-record transcript

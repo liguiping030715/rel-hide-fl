@@ -7,54 +7,79 @@ This repository contains the artifact code for the paper:
 The artifact is organized around the paper rather than as a general-purpose software library. It exposes the three layers that the paper relies on:
 
 - the finite-group APBR-SplitMix compiler;
-- the RLWE/OpenFHE DCRTPoly material construction;
-- the formal evaluation scripts for correctness, scalability, baselines, ablation and FL trajectory preservation.
+- the RLWE/OpenFHE DCRTPoly instantiation;
+- the paper evaluation and reproduction scripts for correctness, scalability, baselines, ablation and FL trajectory preservation.
+
+## Quick Start
+
+Run the repository-level artifact smoke test first. This check does not require OpenFHE; it verifies that the paper-to-code map, scripts, expected-output samples and repository hygiene are intact.
+
+```bash
+python scripts/run_artifact_smoke_test.py
+```
+
+Expected output:
+
+```text
+[PASS] required artifact paths
+[PASS] Python script syntax
+[PASS] no forbidden generated outputs
+[PASS] expected output samples
+[PASS] paper-to-code map targets
+ARTIFACT_SMOKE_TEST=PASS
+```
+
+The full protocol runners require a WSL/OpenFHE build compatible with the paper environment. See `ARTIFACT.md` for supported claims, expected runtime and full reproduction commands.
 
 ## Repository Layout
 
 ```text
 rel-hide-fl/
+├── ARTIFACT.md               # Artifact claims, workflow and expected outputs
 ├── paper/                    # Paper-facing notes and parameter summaries
 ├── src/
 │   ├── rlwe/                 # OpenFHE DCRTPoly material, randomness and RLWE checks
-│   ├── rlwe/packing/         # IntCRT/PolySubR notes and future split-out code
+│   ├── rlwe/packing/         # IntCRT/PolySubR documentation and code pointers
 │   ├── material_separation/  # Materialization/share/recovery mapping notes
 │   ├── apbr_splitmix/        # Full APBR-SplitMix split-path implementation
 │   ├── entities/             # Client/path/central-server role mapping notes
-│   └── utils/                # Shared utility placeholder
+│   └── utils/                # Shared utility notes
 ├── experiments/
 │   ├── correctness/          # Distributed TCP and Docker/WSL preflight runners
 │   ├── performance/          # Scalability/topology runners
 │   ├── baseline/             # Plain, BGV-only, Shamir proxy and aggregate-only baselines
-│   ├── ablation/             # Ablation experiment placeholders
+│   ├── ablation/             # Component ablation configurations and notes
 │   ├── utility/              # MNIST/CIFAR trajectory-preservation runner
 │   └── configs/              # YAML experiment parameters
-├── scripts/                  # Release manifests, certificates and formal matrix launchers
+├── scripts/                  # Release manifests, certificates and matrix launchers
 ├── figures/                  # Scripts that regenerate paper figures and tables
 ├── data/                     # Local datasets and caches; ignored by Git
-├── results/                  # Generated outputs; ignored by Git except README notes
-└── docker/                   # Docker/WSL deployment notes and future container files
+├── results/
+│   ├── expected/             # Small expected summaries for sanity checking
+│   └── sample/               # Small smoke-test output examples
+└── docker/                   # Containerized artifact-smoke-test files
 ```
 
 ## Paper-to-Code Map
 
-| Paper component | Artifact location |
-|---|---|
-| Material-separation framework | `src/material_separation/README.md` |
-| RLWE DCRTPoly material generation and randomness checks | `src/rlwe/` |
-| APBR refresh, fragmentation, dummy padding, permutation and aggregate recovery | `src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp` |
-| Client / S1 / S2 / T1 / T2 / CS role mapping | `src/entities/README.md` and `src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp` |
-| OpenFHE BGV-only reference | `experiments/baseline/bgv_only/` |
-| Shamir-shuffle proxy reference | `experiments/baseline/shamir_shuffle_proxy/` |
-| Four-path aggregate-only baseline | `experiments/baseline/aggregate_only/` |
-| FL trajectory preservation | `experiments/utility/run_fl_utility.py` |
-| Figure and table generation | `figures/plot_evaluation_figures_v8.py` |
+| Paper component | Section / role | Artifact location |
+|---|---|---|
+| Material-separation framework | Section 3 | `src/material_separation/README.md` |
+| RLWE DCRTPoly material generation and randomness checks | Section 4 / Section 6 profile | `src/rlwe/` |
+| IntCRT and PolySubR profile checks | Section 4 / correctness certificate | `src/rlwe/packing/`, `scripts/build_polysubr_idempotent_profile.py` |
+| APBR refresh, fragmentation, dummy padding, permutation and aggregate recovery | APBR-SplitMix construction | `src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp` |
+| Client / S1 / S2 / T1 / T2 / CS role mapping | System model | `src/entities/README.md` and `src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp` |
+| OpenFHE BGV-only reference | Evaluation baseline | `experiments/baseline/bgv_only/` |
+| Shamir-shuffle proxy reference | Evaluation baseline | `experiments/baseline/shamir_shuffle_proxy/` |
+| Four-path aggregate-only baseline | Evaluation baseline | `experiments/baseline/aggregate_only/` |
+| FL trajectory preservation | Evaluation utility sanity check | `experiments/utility/run_fl_utility.py` |
+| Figure and table generation | Evaluation artifacts | `figures/plot_evaluation_figures_v8.py` |
 
 The current C++ protocol implementation is intentionally kept as one auditable runner rather than split into several independently evolving protocol implementations. The module directories document which paper component each part of the runner realizes.
 
 ## Reproduce Paper Results
 
-The formal runners expect a WSL/OpenFHE build directory compatible with the paper environment. Generated outputs are written under `results/` and are ignored by Git by default.
+Generated outputs are written under `results/` and are ignored by Git by default, except for small expected-output samples.
 
 ```powershell
 # Correctness / topology preflights
@@ -80,9 +105,18 @@ python experiments/utility/run_fl_utility.py --route-mode protocol
 python figures/plot_evaluation_figures_v8.py
 ```
 
+## Docker Smoke Test
+
+The container smoke test checks repository integrity and Python syntax. It does not build OpenFHE or run the full protocol matrix.
+
+```bash
+docker build -f docker/Dockerfile -t rel-hide-fl-smoke .
+docker run --rm rel-hide-fl-smoke
+```
+
 ## Protocol Scope
 
-The implementation follows the paper's shared-\(\boldsymbol a\) RLWE material construction:
+The implementation follows the paper's shared-\(\boldsymbol a\) RLWE instantiation:
 
 ```text
 b_i = a * sk_i + t * e_i + iota(m_i)

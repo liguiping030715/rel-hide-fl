@@ -26,6 +26,10 @@ results/**/*.log
 results/**/*.csv
 results/**/*.pdf
 results/**/*.png
+!results/expected/
+!results/expected/**
+!results/sample/
+!results/sample/**
 data/*.pkl
 data/*.npz
 data/**/*.pkl

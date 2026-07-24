@@ -1,3 +1,3 @@
 # Ablation: no material separation
 
-Placeholder for a future single-material comparison. This directory is not part of the current formal result claim unless a corresponding script and result manifest are generated.
+This directory documents the boundary of the current formal claim. A single-material comparison is not included in the reported formal matrices unless a corresponding script and result manifest are generated.
