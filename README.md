@@ -1,65 +1,107 @@
 # Relation-Hiding Secure Aggregation for Federated Learning
 
-This repository contains the experiment code for the paper:
+This repository contains the artifact code for the paper:
 
 **Relation-Hiding Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm**
 
-The artifact implements and evaluates the APBR-SplitMix material-separation protocol described in the paper. The code is organized as a clean paper artifact rather than a full development snapshot: transient build outputs, raw logs, JSON manifests, and generated result files are intentionally excluded.
+The artifact is organized around the paper rather than as a general-purpose software library. It exposes the three layers that the paper relies on:
+
+- the finite-group APBR-SplitMix compiler;
+- the RLWE/OpenFHE DCRTPoly material construction;
+- the formal evaluation scripts for correctness, scalability, baselines, ablation and FL trajectory preservation.
 
 ## Repository Layout
 
 ```text
 rel-hide-fl/
+├── paper/                    # Paper-facing notes and parameter summaries
 ├── src/
-│   ├── crypto/      # RLWE/OpenFHE, BGV, Shamir proxy, randomness components
-│   ├── protocol/    # Four-path APBR-SplitMix protocol integration
-│   └── utils/       # Shared utility code placeholder
+│   ├── rlwe/                 # OpenFHE DCRTPoly material, randomness and RLWE checks
+│   ├── rlwe/packing/         # IntCRT/PolySubR notes and future split-out code
+│   ├── material_separation/  # Materialization/share/recovery mapping notes
+│   ├── apbr_splitmix/        # Full APBR-SplitMix split-path implementation
+│   ├── entities/             # Client/path/central-server role mapping notes
+│   └── utils/                # Shared utility placeholder
 ├── experiments/
-│   └── configs/     # Experiment parameter files
-├── data/            # Local datasets and cached tensors, ignored by Git
-├── results/         # Generated experiment outputs, ignored by Git
-├── figures/         # Plotting scripts for paper tables and figures
-├── docs/            # Artifact notes and additional documentation
-├── scripts/         # Certificate, audit, and artifact helper scripts
-├── .gitignore
-├── README.md
-└── requirements.txt
+│   ├── correctness/          # Distributed TCP and Docker/WSL preflight runners
+│   ├── performance/          # Scalability/topology runners
+│   ├── baseline/             # Plain, BGV-only, Shamir proxy and aggregate-only baselines
+│   ├── ablation/             # Ablation experiment placeholders
+│   ├── utility/              # MNIST/CIFAR trajectory-preservation runner
+│   └── configs/              # YAML experiment parameters
+├── scripts/                  # Release manifests, certificates and formal matrix launchers
+├── figures/                  # Scripts that regenerate paper figures and tables
+├── data/                     # Local datasets and caches; ignored by Git
+├── results/                  # Generated outputs; ignored by Git except README notes
+└── docker/                   # Docker/WSL deployment notes and future container files
 ```
 
-## Main Components
+## Paper-to-Code Map
 
-- `src/crypto/`: baseline and cryptographic building blocks, including OpenFHE BGV-only baseline, DCRTPoly smoke tests, Shamir-shuffle proxy baseline, and randomness self-tests.
-- `src/protocol/`: full OpenFHE DCRTPoly split-path protocol integration.
-- `experiments/`: Python experiment runners for utility, topology, distributed preflights, and sum-only baseline measurements.
-- `figures/`: plotting and paper-artifact scripts, including the v8 evaluation figure/table generator.
-- `scripts/`: supporting scripts for correctness certificates, provenance checks, and artifact audits.
+| Paper component | Artifact location |
+|---|---|
+| Material-separation framework | `src/material_separation/README.md` |
+| RLWE DCRTPoly material generation and randomness checks | `src/rlwe/` |
+| APBR refresh, fragmentation, dummy padding, permutation and aggregate recovery | `src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp` |
+| Client / S1 / S2 / T1 / T2 / CS role mapping | `src/entities/README.md` and `src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp` |
+| OpenFHE BGV-only reference | `experiments/baseline/bgv_only/` |
+| Shamir-shuffle proxy reference | `experiments/baseline/shamir_shuffle_proxy/` |
+| Four-path aggregate-only baseline | `experiments/baseline/aggregate_only/` |
+| FL trajectory preservation | `experiments/utility/run_fl_utility.py` |
+| Figure and table generation | `figures/plot_evaluation_figures_v8.py` |
 
-## Security and Evaluation Scope
+The current C++ protocol implementation is intentionally kept as one auditable runner rather than split into several independently evolving protocol implementations. The module directories document which paper component each part of the runner realizes.
 
-The implementation follows the paper's shared-\(a\) RLWE material construction:
+## Reproduce Paper Results
+
+The formal runners expect a WSL/OpenFHE build directory compatible with the paper environment. Generated outputs are written under `results/` and are ignored by Git by default.
+
+```powershell
+# Correctness / topology preflights
+python experiments/correctness/run_v8_distributed_tcp_preflight.py
+python experiments/correctness/run_v8_docker_wsl_topology_preflight.py
+
+# Formal scalability matrix
+powershell -ExecutionPolicy Bypass -File scripts/run_formal_scalability_matrix.ps1
+
+# Multi-block dimension scaling
+powershell -ExecutionPolicy Bypass -File scripts/run_multiblock_scaling_matrix.ps1
+
+# Controlled baselines
+powershell -ExecutionPolicy Bypass -File scripts/run_controlled_baselines.ps1
+
+# Ablations
+powershell -ExecutionPolicy Bypass -File scripts/run_ablation_matrix.ps1
+
+# FL utility / trajectory preservation
+python experiments/utility/run_fl_utility.py --route-mode protocol
+
+# Regenerate paper tables and figures from result CSV files
+python figures/plot_evaluation_figures_v8.py
+```
+
+## Protocol Scope
+
+The implementation follows the paper's shared-\(\boldsymbol a\) RLWE material construction:
 
 ```text
 b_i = a * sk_i + t * e_i + iota(m_i)
 ```
 
-The setup process samples and publishes one common public DCRTPoly \(a\). Each client samples its own secret and error material, splits key/body materials over the four paths, and the servers apply APBR-SplitMix before aggregate recovery.
+Setup samples one public DCRTPoly \(\boldsymbol a\) and binds it to the run profile. Each client samples its own secret and error material, separates key-side and ciphertext-body material, sends additive shares to \(S_1,S_2,T_1,T_2\), and the path servers execute APBR-SplitMix before central aggregate recovery.
 
-This artifact supports local reproducible evaluation on a single host; clients can be simulated via WSL processes or Docker containers. It is not designed for WAN latency benchmarking or industrial production deployment.
+Only additive homomorphic aggregation is used. This artifact does not claim WAN latency, production deployment measurements, malicious security, dropout recovery, network anonymity or concrete 128-bit post-quantum security bits.
 
-## Python Dependencies
+## Dependencies
 
-Install the Python dependencies with:
+Python dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-The C++ OpenFHE components require an OpenFHE development installation compatible with the version used in the paper experiments.
+C++ components require OpenFHE development headers/libraries compatible with the version used in the paper experiments. The Docker/WSL topology preflights assume a Windows host with WSL2 and optional Docker clients.
 
-## Result Files
+## Results and Data Policy
 
-Generated outputs should be written under `results/` and are ignored by Git by default. Paper figures should be regenerated from scripts rather than committed as raw experiment output unless a release artifact explicitly requires them.
-
-## Notes
-
-This repository intentionally excludes old development manifests and transient build artifacts. If a full provenance bundle is needed for archival review, generate it separately from the experiment scripts and place it outside the source tree or in a release asset.
+Large generated outputs, raw logs, datasets, binary builds and JSON manifests are excluded from the source repository. Recreate them with the scripts above, or attach frozen provenance bundles as release assets when needed for artifact review.

@@ -92,7 +92,7 @@ def main() -> int:
     ap.add_argument("--manifest", type=Path, default=EXP_ROOT / "manifests" / "formal_evaluation_release_v7_idempotent_polysubr.json")
     ap.add_argument("--certificate", type=Path, default=EXP_ROOT / "results" / "formal" / "correctness_profile" / "polysubr_idempotent_certificate.json")
     ap.add_argument("--kat", type=Path, default=EXP_ROOT / "results" / "formal" / "correctness_profile" / "polysubr_idempotent_kat.json")
-    ap.add_argument("--source", type=Path, default=EXP_ROOT / "src" / "openfhe_dcrtpoly_wire_integration.cpp")
+    ap.add_argument("--source", type=Path, default=EXP_ROOT / "src" / "apbr_splitmix" / "openfhe_dcrtpoly_wire_integration.cpp")
     ap.add_argument("--binary", default="/home/liguiping/openfhe_splitpath_build/openfhe_dcrtpoly_wire_integration")
     ap.add_argument("--results", type=Path, default=EXP_ROOT / "results" / "formal")
     ap.add_argument("--artifact-manifest", type=Path, default=EXP_ROOT / "results" / "formal" / "evaluation_artifact_manifest.json")

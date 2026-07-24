@@ -1,0 +1,16 @@
+name: rel-hide-fl
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - matplotlib
+  - pyyaml
+  - tqdm
+  - scipy
+  - pip
+  - pip:
+      - torch
+      - torchvision
+      - openfhe-python

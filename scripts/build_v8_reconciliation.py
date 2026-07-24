@@ -79,7 +79,7 @@ def main() -> None:
     dataset_files = [
         bind(path) for path in sorted(DATA_ROOT.rglob("*")) if path.is_file()
     ]
-    utility_script = ROOT / "scripts" / "run_fl_utility.py"
+    utility_script = ROOT / "experiments" / "utility" / "run_fl_utility.py"
     partitions = [reconstruct_partitions(seed) for seed in (2024, 2025, 2026)]
 
     try:

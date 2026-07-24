@@ -13,8 +13,8 @@ from typing import Any, Dict, List, Tuple
 
 
 ROOT = Path(__file__).absolute().parent.parent
-SOURCE = ROOT / "src" / "openfhe_dcrtpoly_wire_integration.cpp"
-RANDOMNESS = ROOT / "src" / "v8_randomness.h"
+SOURCE = ROOT / "src" / "apbr_splitmix" / "openfhe_dcrtpoly_wire_integration.cpp"
+RANDOMNESS = ROOT / "src" / "rlwe" / "v8_randomness.h"
 VENDOR = ROOT / "spec" / "vendor_bindings" / "openfhe_1.2.3"
 CORE_PREFLIGHT = ROOT / "results" / "preflight" / "v8_rc1_openfhe_core" / "c10_d784_dgg32.json"
 CONTROL_PREFLIGHT = (

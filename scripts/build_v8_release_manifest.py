@@ -88,10 +88,10 @@ def main() -> int:
             raise RuntimeError(f"workspace/deployed binary mismatch: {key}")
 
     sources = {
-        "wire_integration_cpp": bind("src/openfhe_dcrtpoly_wire_integration.cpp"),
-        "randomness_header": bind("src/v8_randomness.h"),
-        "bgv_only_cpp": bind("src/openfhe_bgv_only_baseline.cpp"),
-        "shamir_proxy_cpp": bind("src/shamir_shuffle_proxy_baseline.cpp"),
+        "wire_integration_cpp": bind("src/apbr_splitmix/openfhe_dcrtpoly_wire_integration.cpp"),
+        "randomness_header": bind("src/rlwe/v8_randomness.h"),
+        "bgv_only_cpp": bind("experiments/baseline/bgv_only/openfhe_bgv_only_baseline.cpp"),
+        "shamir_proxy_cpp": bind("experiments/baseline/shamir_shuffle_proxy/shamir_shuffle_proxy_baseline.cpp"),
         "cmake": bind("CMakeLists.txt"),
     }
     scripts = {
@@ -99,11 +99,11 @@ def main() -> int:
         "multiblock_scaling": bind("scripts/run_multiblock_scaling_matrix.ps1"),
         "controlled_baselines": bind("scripts/run_controlled_baselines.ps1"),
         "ablations": bind("scripts/run_ablation_matrix.ps1"),
-        "fl_utility": bind("scripts/run_fl_utility.py"),
-        "artifact_generation": bind("scripts/generate_evaluation_artifacts.py"),
+        "fl_utility": bind("experiments/utility/run_fl_utility.py"),
+        "artifact_generation": bind("figures/plot_evaluation_figures_v8.py"),
         "p3_certificate_builder": bind("scripts/build_v8_p3_certificate.py"),
-        "tcp_preflight": bind("scripts/run_v8_distributed_tcp_preflight.py"),
-        "docker_wsl_preflight": bind("scripts/run_v8_docker_wsl_topology_preflight.py"),
+        "tcp_preflight": bind("experiments/correctness/run_v8_distributed_tcp_preflight.py"),
+        "docker_wsl_preflight": bind("experiments/correctness/run_v8_docker_wsl_topology_preflight.py"),
     }
 
     shamir_source = (ROOT / sources["shamir_proxy_cpp"]["path"]).read_text(encoding="utf-8")
