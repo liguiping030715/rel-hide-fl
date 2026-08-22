@@ -2,7 +2,7 @@
 
 This artifact supports the evaluation claims of:
 
-**Relation-Hiding Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm**
+**Cross-Material Unlinkability in Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm**
 
 ## Supported Claims
 
