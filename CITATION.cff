@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Relation-Hiding Secure Aggregation for Federated Learning: Artifact"
+title: "Cross-Material Unlinkability in Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm: Artifact"
 message: "If you use this artifact, please cite the associated paper."
 type: software
 authors:
