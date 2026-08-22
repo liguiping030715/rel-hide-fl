@@ -1,8 +1,8 @@
-# Relation-Hiding Secure Aggregation for Federated Learning
+# Cross-Material Unlinkability in Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm
 
 This repository contains the artifact code for the paper:
 
-**Relation-Hiding Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm**
+**Cross-Material Unlinkability in Secure Aggregation for Federated Learning: An RLWE-Based Material-Separation Paradigm**
 
 The artifact is organized around the paper rather than as a general-purpose software library. It exposes the three layers that the paper relies on:
 
