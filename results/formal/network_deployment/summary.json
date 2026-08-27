@@ -1,0 +1,24 @@
+{
+  "csv": {
+    "runs": "results/formal/network_deployment/network_deployment_runs.csv",
+    "summary": "results/formal/network_deployment/network_deployment_summary.csv"
+  },
+  "dimension": 784,
+  "figures": [
+    "results/formal/network_deployment/figures/network_rtt_sensitivity.png",
+    "results/formal/network_deployment/figures/network_bandwidth_sensitivity.png",
+    "results/formal/network_deployment/figures/network_client_scalability.png"
+  ],
+  "limitations": [
+    "The default runner uses local counted TCP roles; use --apply-netem in WSL/Linux to enforce tc/netem conditions.",
+    "The client count denotes logical clients unless each client role is externally mapped to a separate host/container.",
+    "Local FL training is excluded; the reported interval is the control-barrier protocol round."
+  ],
+  "measured_runs": 80,
+  "repetitions": 5,
+  "schema": "network_deployment_matrix_summary_v1",
+  "scope": "distributed counted-TCP secure-aggregation roles with optional Linux tc/netem emulation",
+  "seed": 2024,
+  "status": "PASS",
+  "warmups": 1
+}

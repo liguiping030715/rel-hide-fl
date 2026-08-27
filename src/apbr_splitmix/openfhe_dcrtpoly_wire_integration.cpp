@@ -1281,8 +1281,14 @@ int run_distributed_file_role(const Options& opt) {
         bool apbrPreserved = false;
         bool roundtrip = false;
         DCRTPoly localSum(params, Format::EVALUATION, true);
-        const std::vector<WireBlob> relay = process_path(
-            records, params, opt.k, opt.k0, opt.apbr, apbrPreserved, roundtrip, localSum);
+        std::vector<WireBlob> relay;
+        if (opt.variant == "four_path_sum_only") {
+            relay = relay_path_sum_only(records, params, roundtrip, localSum);
+            apbrPreserved = true;
+        } else {
+            relay = process_path(
+                records, params, opt.k, opt.k0, opt.apbr, apbrPreserved, roundtrip, localSum);
+        }
         const std::vector<uint8_t> relayBytes = serialize_wire_batch(relay);
         size_t sentRelayBytes = relayBytes.size();
         if (opt.transport == "tcp") {
@@ -1311,8 +1317,10 @@ int run_distributed_file_role(const Options& opt) {
                   << "  \"bound_prng_attestation_digest\": \"" << attestation.boundDigest << "\",\n"
                   << "  \"received_client_bytes\": " << receivedBytes << ",\n"
                   << "  \"relay_bytes\": " << sentRelayBytes << ",\n"
-                  << "  \"real_fragments\": " << (opt.clients * opt.k) << ",\n"
-                  << "  \"dummy_fragments\": " << opt.k0 << ",\n"
+                  << "  \"real_fragments\": " << (opt.variant == "four_path_sum_only" ? 1 : opt.clients * opt.k) << ",\n"
+                  << "  \"dummy_fragments\": " << (opt.variant == "four_path_sum_only" ? 0 : opt.k0) << ",\n"
+                  << "  \"variant\": \"" << opt.variant << "\",\n"
+                  << "  \"apbr_enabled\": " << ((opt.apbr && opt.variant != "four_path_sum_only") ? "true" : "false") << ",\n"
                   << "  \"apbr_sum_preserved\": " << (apbrPreserved ? "true" : "false") << ",\n"
                   << "  \"wire_roundtrip\": " << (roundtrip ? "true" : "false") << ",\n"
                   << "  \"control_ready_sent\": " << (opt.controlBarrier ? "true" : "false") << ",\n"

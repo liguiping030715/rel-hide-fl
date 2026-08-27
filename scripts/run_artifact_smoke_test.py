@@ -32,6 +32,12 @@ REQUIRED_PATHS = [
 ]
 
 FORBIDDEN_EXTENSIONS = {".json", ".log", ".csv", ".pkl", ".npz", ".exe", ".dll", ".obj", ".o"}
+GENERATED_DIR_PREFIXES = (
+    "build/",
+    "cmake-build-",
+    "results/formal/",
+    "results/tmp/",
+)
 
 
 def fail(message: str) -> None:
@@ -54,8 +60,23 @@ def check_python_syntax() -> None:
     print("[PASS] Python script syntax")
 
 
+def git_ignored_paths(rels: list[str]) -> set[str]:
+    if not rels:
+        return set()
+    result = subprocess.run(
+        ["git", "check-ignore", "--stdin"],
+        cwd=ROOT,
+        input="\n".join(rels) + "\n",
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return set(result.stdout.splitlines())
+
+
 def check_forbidden_outputs() -> None:
-    offenders = []
+    candidates = []
     for path in ROOT.rglob("*"):
         if not path.is_file():
             continue
@@ -64,8 +85,12 @@ def check_forbidden_outputs() -> None:
         rel = path.relative_to(ROOT).as_posix()
         if rel.startswith("results/expected/") or rel.startswith("results/sample/"):
             continue
+        if rel.startswith(GENERATED_DIR_PREFIXES):
+            continue
         if path.suffix.lower() in FORBIDDEN_EXTENSIONS:
-            offenders.append(rel)
+            candidates.append(rel)
+    ignored = git_ignored_paths(candidates)
+    offenders = [rel for rel in candidates if rel not in ignored]
     if offenders:
         fail("forbidden generated outputs present: " + ", ".join(offenders[:20]))
     print("[PASS] no forbidden generated outputs")

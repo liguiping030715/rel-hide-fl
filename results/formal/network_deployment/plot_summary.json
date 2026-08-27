@@ -1,0 +1,9 @@
+{
+  "figures": [
+    "results/formal/network_deployment/figures/network_rtt_sensitivity.png",
+    "results/formal/network_deployment/figures/network_bandwidth_sensitivity.png",
+    "results/formal/network_deployment/figures/network_client_scalability.png"
+  ],
+  "schema": "network_deployment_plot_summary_v1",
+  "status": "PASS"
+}

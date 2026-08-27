@@ -72,11 +72,13 @@ def main() -> int:
     parser.add_argument("--clients", type=int, required=True)
     parser.add_argument("--dimension", type=int, required=True)
     parser.add_argument("--noise", choices=("zero", "small", "dgg32"), required=True)
+    parser.add_argument("--variant", choices=("full_protocol", "four_path_sum_only"), default="full_protocol")
     parser.add_argument("--seed", type=int, default=2024)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--base-port", type=int, required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--control-barrier", action="store_true")
+    parser.add_argument("--role-timeout", type=int, default=180)
     args = parser.parse_args()
 
     if not args.binary.is_file():
@@ -108,7 +110,7 @@ def main() -> int:
         "--k0", "2",
         "--seed", str(args.seed),
         "--noise", args.noise,
-        "--variant", "full_protocol",
+        "--variant", args.variant,
         "--packing", "intcrt_polysubr",
         "--run-id", args.run_id,
         "--release-id", "v8_RC1",
@@ -147,12 +149,12 @@ def main() -> int:
             for client in range(args.clients)
         ]
         for client in clients:
-            roles.append(collect_role(client, 180))
+            roles.append(collect_role(client, args.role_timeout))
         for role in running[1:]:  # Paths relay only after all client uploads arrive.
-            roles.append(collect_role(role, 180))
-        roles.append(collect_role(running[0], 180))  # CS completes after four path relays.
+            roles.append(collect_role(role, args.role_timeout))
+        roles.append(collect_role(running[0], args.role_timeout))  # CS completes after four path relays.
         if orchestrator is not None:
-            roles.append(collect_role(orchestrator, 180))
+            roles.append(collect_role(orchestrator, args.role_timeout))
     except Exception as error:
         failure = {"type": type(error).__name__, "message": str(error)}
         all_running = [*running, *([] if orchestrator is None else [orchestrator])]
@@ -231,6 +233,7 @@ def main() -> int:
             "clients": args.clients,
             "dimension": args.dimension,
             "noise": args.noise,
+            "variant": args.variant,
             "application_seed": args.seed,
             "base_port": args.base_port,
             "control_barrier": args.control_barrier,

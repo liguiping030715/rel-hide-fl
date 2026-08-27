@@ -18,6 +18,7 @@ CMakeCache.txt
 *.o
 
 # Experiment outputs
+results/tmp/
 results/*.json
 results/*.log
 results/*.csv
@@ -26,6 +27,9 @@ results/**/*.log
 results/**/*.csv
 results/**/*.pdf
 results/**/*.png
+results/**/*.txt
+results/**/*.jsonl
+results/**/*.bin
 !results/expected/
 !results/expected/**
 !results/sample/
